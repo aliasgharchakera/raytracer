@@ -30,9 +30,9 @@ void World::set_camera(Camera *c_ptr) {
   camera_ptr = c_ptr;
 }
 
-// FIXME: get_normal is not implemented
 // Returns appropriate shading information corresponding to intersection of
 // the ray with the scene geometry.
+// FIXME: get_normal is not implemented
 ShadeInfo World::hit_objects(const Ray &ray) {
   ShadeInfo sinfo(*this);
   float t;

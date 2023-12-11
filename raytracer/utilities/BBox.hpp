@@ -7,6 +7,8 @@
 */
 
 #include "Point3D.hpp"
+#include "Ray.hpp"
+#include "../geometry/Geometry.hpp"
 
 class Geometry;
 class Ray;
