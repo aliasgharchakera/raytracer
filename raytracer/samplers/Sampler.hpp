@@ -13,6 +13,9 @@
 */
 
 #include <vector>
+#include "../world/ViewPlane.hpp"
+#include "../cameras/Camera.hpp"
+#include "../utilities/Ray.hpp"
 
 class Camera;
 class Ray;

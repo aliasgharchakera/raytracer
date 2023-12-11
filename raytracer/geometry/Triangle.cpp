@@ -28,12 +28,11 @@ std::string Triangle::to_string() const {
   return "Triangle";
 }
 
+// TODO: Implement ray-triangle intersection algorithm
 bool Triangle::hit(const Ray &ray, float &t, ShadeInfo &s) const {
-  // TODO: Implement ray-triangle intersection algorithm
-  return false;
+  
 }
 
 BBox Triangle::getBBox() const {
-  // TODO: Implement bounding box calculation
-  return BBox();
+  return BBox(min(min(v0, v1), v2), max(max(v0,v1), v2))
 }
