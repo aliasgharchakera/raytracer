@@ -28,7 +28,7 @@ std::string Sphere::to_string() const {
 
 // Ray intersection. Set t and sinfo as per intersection with this object.
 // REVIEW: Idk if this is correct.
-bool Sphere::hit(const Ray &ray, float &tmin, ShadeInfo &sinfo) const {
+bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &sinfo) const {
   Vector3D oc = ray.o - c;
   double a = ray.d * ray.d;
   double b = 2.0 * oc * ray.d;
@@ -36,19 +36,19 @@ bool Sphere::hit(const Ray &ray, float &tmin, ShadeInfo &sinfo) const {
   double discriminant = b * b - 4 * a * c;
 
   if (discriminant > 0) {
-    double t = (-b - sqrt(discriminant)) / (2.0 * a);
-    if (t > kEpsilon) {
-      tmin = t;
-      sinfo.hit_point = ray.o + t * ray.d;
-      sinfo.normal = (oc + t * ray.d) / r;
+    double curr_t = (-b - sqrt(discriminant)) / (2.0 * a);
+    if (curr_t > kEpsilon) {
+      t = curr_t;
+      sinfo.hit_point = ray.o + curr_t * ray.d;
+      sinfo.normal = (oc + curr_t * ray.d) / r;
       return true;
     }
 
-    t = (-b + sqrt(discriminant)) / (2.0 * a);
-    if (t > kEpsilon) {
-      tmin = t;
-      sinfo.hit_point = ray.o + t * ray.d;
-      sinfo.normal = (oc + t * ray.d) / r;
+    curr_t = (-b + sqrt(discriminant)) / (2.0 * a);
+    if (curr_t > kEpsilon) {
+      t = curr_t;
+      sinfo.hit_point = ray.o + curr_t * ray.d;
+      sinfo.normal = (oc + curr_t * ray.d) / r;
       return true;
     }
   }
