@@ -2,10 +2,6 @@
 
 #include "Plane.hpp"
 
-#include <cmath>
-#include <limits>
-#include <sstream>
-
 // Constructors.
 Plane::Plane() : a(0, 0, 0), n(0, 1, 0) {}
 

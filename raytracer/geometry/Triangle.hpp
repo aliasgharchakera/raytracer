@@ -9,9 +9,6 @@
 
 #include "Geometry.hpp"
 
-#include "../utilities/Point3D.hpp"
-#include "../utilities/BBox.hpp"
-
 class Triangle : public Geometry {
 protected:
   Point3D v0, v1, v2; // the vertices. they must not be colinear.

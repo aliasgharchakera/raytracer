@@ -1,10 +1,4 @@
-#pragma once
-
 #include "Sphere.hpp"
-
-#include <cmath>
-#include <limits>
-#include <sstream>
 
 // Constructors.
 Sphere::Sphere() : c(0, 0, 0), r(1) {}
