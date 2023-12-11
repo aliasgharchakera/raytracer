@@ -7,6 +7,8 @@
 */
 
 #include <string>
+#include <sstream>
+#include "Point3D.hpp"
 
 class Point3D;
 
