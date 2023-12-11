@@ -22,5 +22,7 @@ Parallel &Parallel::operator=(const Parallel &other) {
   return *this;
 }
 
-// TODO: Implement this function.
-Vector3D Parallel::get_direction(const Point3D &p) const { return dir; }
+// REVIEW: review this function
+Vector3D Parallel::get_direction(const Point3D &p) const {
+    return dir;
+}

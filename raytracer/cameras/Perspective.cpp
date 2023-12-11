@@ -22,8 +22,7 @@ Perspective &Perspective::operator=(const Perspective &other) {
   return *this;
 }
 
-// TODO: Implement this function.
-// partial implementation
+// REVIEW: review this function
 Vector3D Perspective::get_direction(const Point3D &p) const {
     Vector3D v = p - pos;
     v.normalize();
