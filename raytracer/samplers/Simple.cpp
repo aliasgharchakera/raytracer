@@ -17,7 +17,7 @@ Simple& Simple::operator=(const Simple& other) {
   return *this;
 }
 
-//TODO check this function
+//REVIEW check this function
 // Shoot a ray of weight 1 through the center of the pixel.
 std::vector<Ray> Simple::get_rays(int px, int py) const {
   std::vector<Ray> rays;
