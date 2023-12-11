@@ -10,6 +10,7 @@
 #include "Camera.hpp"
 
 #include "../utilities/Point3D.hpp"
+#include "../utilities/Vector3D.hpp"
 
 class Vector3D;
 
