@@ -10,6 +10,10 @@
 #include "Geometry.hpp"
 
 #include "../utilities/Point3D.hpp"
+#include "../utilities/Constants.hpp"
+#include "../utilities/ShadeInfo.hpp"
+#include "../utilities/Vector3D.hpp"
+#include "../utilities/BBox.hpp"
 
 class Sphere : public Geometry {
 protected:

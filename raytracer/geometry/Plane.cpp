@@ -2,11 +2,6 @@
 
 #include "Plane.hpp"
 
-#include "../utilities/Constants.hpp"
-#include "../utilities/ShadeInfo.hpp"
-#include "../utilities/Vector3D.hpp"
-#include "../utilities/BBox.hpp"
-
 #include <cmath>
 #include <limits>
 #include <sstream>
