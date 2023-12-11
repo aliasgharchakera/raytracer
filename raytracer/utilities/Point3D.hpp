@@ -8,6 +8,8 @@
 
 #include <string>
 
+#include "Vector3D.hpp"
+
 class Vector3D;
 
 class Point3D {
