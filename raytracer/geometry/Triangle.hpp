@@ -10,6 +10,7 @@
 #include "Geometry.hpp"
 
 #include "../utilities/Point3D.hpp"
+#include "../utilities/BBox.hpp"
 
 class Triangle : public Geometry {
 protected:
