@@ -26,8 +26,39 @@ std::string Sphere::to_string() const {
   return oss.str();
 }
 
-// TODO: Implement this function.
-bool Sphere::hit(const Ray &ray, float &tmin, ShadeInfo &sinfo) const {}
+// Ray intersection. Set t and sinfo as per intersection with this object.
+// REVIEW: Idk if this is correct.
+bool Sphere::hit(const Ray &ray, float &tmin, ShadeInfo &sinfo) const {
+  Vector3D oc = ray.o - c;
+  double a = ray.d * ray.d;
+  double b = 2.0 * oc * ray.d;
+  double c = oc * oc - r * r;
+  double discriminant = b * b - 4 * a * c;
 
-// TODO: Implement this function.
-BBox Sphere::getBBox() const {}
+  if (discriminant > 0) {
+    double t = (-b - sqrt(discriminant)) / (2.0 * a);
+    if (t > kEpsilon) {
+      tmin = t;
+      sinfo.hit_point = ray.o + t * ray.d;
+      sinfo.normal = (oc + t * ray.d) / r;
+      return true;
+    }
+
+    t = (-b + sqrt(discriminant)) / (2.0 * a);
+    if (t > kEpsilon) {
+      tmin = t;
+      sinfo.hit_point = ray.o + t * ray.d;
+      sinfo.normal = (oc + t * ray.d) / r;
+      return true;
+    }
+  }
+
+  return false;
+}
+
+// Get bounding box.
+BBox Sphere::getBBox() const {
+  Point3D minPoint(c.x - r, c.y - r, c.z - r);
+  Point3D maxPoint(c.x + r, c.y + r, c.z + r);
+  return BBox(minPoint, maxPoint);
+}
