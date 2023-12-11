@@ -43,7 +43,7 @@ public:
 
   // Get/set material.
   Material *get_material() const;
-  void set_material(Material *mPtr);
+  void set_material(Material *mPtr); 
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
   virtual bool hit(const Ray &ray, float &t, ShadeInfo &sinfo) const = 0;

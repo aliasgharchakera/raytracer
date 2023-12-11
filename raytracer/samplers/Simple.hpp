@@ -14,7 +14,7 @@ class Simple : public Sampler {
 protected:
   // add members to cache values to avoid recomputation in get_rays().
   // Cache values to avoid recomputation in get_rays().
-  //TODO verify this
+  //REVIEW verify this
   int cached_px;
   int cached_py;
   std::vector<Ray> cached_rays;

@@ -8,6 +8,8 @@
 */
 
 #include <string>
+#include "RGBColor.hpp"
+#include "../world/ViewPlane.hpp"
 
 class RGBColor;
 class ViewPlane;
