@@ -31,8 +31,25 @@ std::string Plane::to_string() const {
   return oss.str();
 }
 
-// TODO: Implement this function.
-bool Plane::hit(const Ray &ray, float &tmin, ShadeInfo &sinfo) const {}
 
-// TODO: Implement this function.
-BBox Plane::getBBox() const {}
+bool Plane::hit(const Ray &ray, float &t, ShadeInfo &s) const {
+  
+  float t_point = (a - ray.o) * n / (ray.d * n);
+
+  if (t_point > kEpsilon) {
+    t = t_point;
+    s.normal = n;
+    s.normal.normalize();
+    s.hit_point = ray.o + t * ray.d;
+    s.ray = ray;
+    s.t = t_point;
+    return true;
+  }
+
+  return false;
+
+}
+
+BBox Plane::getBBox() const {
+  return BBox();
+}
