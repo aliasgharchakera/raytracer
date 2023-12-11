@@ -22,5 +22,13 @@ Cosine &Cosine::operator=(const Cosine &other) {
   return *this;
 }
 
-// TODO: Implement this function.
-RGBColor Cosine::shade(const ShadeInfo &sinfo) const {}
+// REVIEW: Is this correct?
+RGBColor Cosine::shade(const ShadeInfo &sinfo) const {
+  // color * cos \theta (cos \theta: dot product of normal and -ray.dir) 
+  return color * (sinfo.normal * -sinfo.ray.d);
+}
+
+// Get normal.
+Vector3D Cosine::get_normal(const ShadeInfo &sinfo) const {
+  return sinfo.normal;
+}

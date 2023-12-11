@@ -13,6 +13,8 @@
 #include "Material.hpp"
 
 #include "../utilities/RGBColor.hpp"
+#include "../utilities/ShadeInfo.hpp"
+#include "../utilities/Vector3D.hpp"
 
 class Cosine : public Material {
 protected:
@@ -37,4 +39,7 @@ public:
      Assuming unit vectors, cos \theta = dot product of normal and -ray.dir.
   */
   virtual RGBColor shade(const ShadeInfo &sinfo) const override;
+
+  // Get normal.
+  virtual Vector3D get_normal(const ShadeInfo &sinfo) const override;
 };
