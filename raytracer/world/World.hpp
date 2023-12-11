@@ -13,6 +13,16 @@
 #include <vector>
 
 #include "../utilities/RGBColor.hpp"
+#include "../utilities/ShadeInfo.hpp"
+#include "../utilities/Constants.hpp"
+#include "../utilities/Ray.hpp"
+#include "../utilities/BBox.hpp"
+#include "../utilities/Point3D.hpp"
+#include "../utilities/Vector3D.hpp"
+#include "../geometry/Geometry.hpp"
+#include "../cameras/Camera.hpp"
+#include "../samplers/Sampler.hpp"
+#include "../materials/Material.hpp"
 
 #include "ViewPlane.hpp"
 
