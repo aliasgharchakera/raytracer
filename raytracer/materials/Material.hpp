@@ -24,4 +24,7 @@ public:
 
   // Get color.
   virtual RGBColor shade(const ShadeInfo &sinfo) const = 0;
+
+  // Get normal.
+  virtual Vector3D get_normal(const ShadeInfo &sinfo) const = 0;
 };
