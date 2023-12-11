@@ -7,6 +7,7 @@
 */
 
 #include <string>
+#include <math.h>
 
 #include "Vector3D.hpp"
 

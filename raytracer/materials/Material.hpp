@@ -9,6 +9,7 @@
 
 class RGBColor;
 class ShadeInfo;
+class Vector3D;
 
 class Material {
 public:

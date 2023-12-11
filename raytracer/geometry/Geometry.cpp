@@ -1,5 +1,9 @@
 #include "Geometry.hpp"
 
+// Constructors.
+Geometry::Geometry() : material_ptr(NULL) {}
+
+// Get/set material.
 Material* Geometry::get_material() const {
     return material_ptr;
 }

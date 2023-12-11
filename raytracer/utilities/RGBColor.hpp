@@ -11,6 +11,7 @@
 */
 
 #include <string>
+#include <math.h>
 
 class RGBColor {
 public:

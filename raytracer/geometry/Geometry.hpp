@@ -11,6 +11,7 @@
 #include <cmath>
 #include <limits>
 #include <sstream>
+#include <math.h>
 
 #include "../utilities/Point3D.hpp"
 #include "../utilities/Vector3D.hpp"

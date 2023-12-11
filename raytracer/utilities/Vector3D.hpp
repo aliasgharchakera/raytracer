@@ -8,6 +8,8 @@
 
 #include <string>
 #include <sstream>
+#include <math.h>
+
 #include "Point3D.hpp"
 
 class Point3D;

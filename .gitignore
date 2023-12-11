@@ -8,3 +8,7 @@ auto
 *.synctex.gz
 *.fdb_latexmk
 *.fls
+*.exe
+*makefile
+*.ppm
+*.png
