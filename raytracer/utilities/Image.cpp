@@ -3,7 +3,6 @@
 #include <fstream>
 
 // Constructors.
-//REVIEW: check constructor
 Image::Image(int hres, int vres) : hres(hres), vres(vres) {
   colors = new RGBColor*[hres];
   for (int i = 0; i < hres; i++) {

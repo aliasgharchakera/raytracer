@@ -22,7 +22,6 @@ Cosine &Cosine::operator=(const Cosine &other) {
   return *this;
 }
 
-// REVIEW: Is this correct?
 RGBColor Cosine::shade(const ShadeInfo &sinfo) const {
   // color * cos \theta (cos \theta: dot product of normal and -ray.dir) 
   return color * (sinfo.normal * -sinfo.ray.d);

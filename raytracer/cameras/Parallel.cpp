@@ -22,7 +22,6 @@ Parallel &Parallel::operator=(const Parallel &other) {
   return *this;
 }
 
-// REVIEW: review this function
 Vector3D Parallel::get_direction(const Point3D &p) const {
     return dir;
 }
