@@ -27,33 +27,42 @@ std::string Sphere::to_string() const {
 }
 
 // Ray intersection. Set t and sinfo as per intersection with this object.
-// REVIEW: Idk if this is correct.
+// REVIEW: Works for now, but not sure if this would work with other objects
 bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &sinfo) const {
-  Vector3D oc = ray.o - c;
-  double a = ray.d * ray.d;
-  double b = 2.0 * oc * ray.d;
-  double c = oc * oc - r * r;
-  double discriminant = b * b - 4 * a * c;
+  double a = ray.d*(ray.d);
+  double b = 2 * ray.d*(ray.o - c);
+  double d = (ray.o - c)*(ray.o - c) - r * r;
 
-  if (discriminant > 0) {
-    double curr_t = (-b - sqrt(discriminant)) / (2.0 * a);
-    if (curr_t > kEpsilon) {
-      t = curr_t;
-      sinfo.hit_point = ray.o + curr_t * ray.d;
-      sinfo.normal = (oc + curr_t * ray.d) / r;
-      return true;
-    }
+  double discriminant = b * b - 4 * a * d;
 
-    curr_t = (-b + sqrt(discriminant)) / (2.0 * a);
-    if (curr_t > kEpsilon) {
-      t = curr_t;
-      sinfo.hit_point = ray.o + curr_t * ray.d;
-      sinfo.normal = (oc + curr_t * ray.d) / r;
-      return true;
+  if (discriminant < 0) {
+    return false;
+  }
+
+  double t0 = (-b - sqrt(discriminant)) / (2 * a);
+  double t1 = (-b + sqrt(discriminant)) / (2 * a);
+
+  if (t0 > t1) {
+    std::swap(t0, t1);
+  }
+
+  if (t0 < kEpsilon) {
+    t0 = t1;
+    if (t0 < kEpsilon) {
+      return false;
     }
   }
 
-  return false;
+  t = t0;
+  sinfo.hit = true;
+  sinfo.hit_point = ray.o + t * ray.d;
+  sinfo.normal = (sinfo.hit_point - c) / r;
+  sinfo.ray = ray;
+  sinfo.t = t;
+  sinfo.material_ptr = material_ptr;
+
+  return true;
+
 }
 
 // Get bounding box.

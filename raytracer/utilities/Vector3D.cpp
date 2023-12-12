@@ -44,8 +44,11 @@ Vector3D Vector3D::operator-(const Vector3D& v) const {
   return Vector3D(x - v.x, y - v.y, z - v.z);
 }
 
-Vector3D Vector3D::operator-=(const Vector3D& v) const {
-  return Vector3D(x - v.x, y - v.y, z - v.z);
+Vector3D Vector3D::operator-=(const Vector3D& v) {
+  x -= v.x;
+  y -= v.y;
+  z -= v.z;
+  return *this;
 }
 
 // Scaling.

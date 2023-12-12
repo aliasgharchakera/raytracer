@@ -42,7 +42,7 @@ public:
   Vector3D operator+(const Vector3D &v) const;   // addition.
   Vector3D &operator+=(const Vector3D &v);       // compound addition.
   Vector3D operator-(const Vector3D &v) const;   // subtraction.
-  Vector3D operator-=(const Vector3D &v) const;  // compound subtraction.
+  Vector3D operator-=(const Vector3D &v);  // compound subtraction.
 
   // Scaling.
   Vector3D operator*(const double a) const;

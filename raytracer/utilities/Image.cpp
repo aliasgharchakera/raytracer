@@ -33,7 +33,7 @@ void Image::write_ppm(std::string path) const {
     file << "P3\n";
     file << hres << " " << vres << "\n";
     file << "255\n";
-    for (int y = vres - 1; y >= 0; y--) {
+    for (int y = 0; y < vres; y++) {
       for (int x = 0; x < hres; x++) {
         const RGBColor& color = colors[x][y];
         file << static_cast<int>(color.r * 255) << " ";
