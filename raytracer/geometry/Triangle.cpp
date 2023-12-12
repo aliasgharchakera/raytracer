@@ -29,7 +29,7 @@ std::string Triangle::to_string() const {
 }
 
 // Ray intersection. Set t and sinfo as per intersection with this object.
-// FIXME: Optimize this function
+// FIXME: Needs some tweaking.
 bool Triangle::hit(const Ray &ray, float &t, ShadeInfo &s) const {
   
  	double a = v0.x - v1.x, b = v0.x - v2.x, c = ray.d.x, d = v0.x - ray.o.x; 

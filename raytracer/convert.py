@@ -1,6 +1,6 @@
 from PIL import Image
 import subprocess
-# FIXME: Optimize this
+# HACK: Optimize this
 with open("scene.ppm") as file:
     # Read header P3
     header = file.readline()
