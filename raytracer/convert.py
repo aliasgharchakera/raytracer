@@ -1,6 +1,13 @@
+import sys
 from PIL import Image
-import subprocess
-# HACK: Optimize this
+import os
+# Check if command line argument is provided
+if len(sys.argv) < 2:
+    print("Please provide a name as a command line argument.")
+    sys.exit(1)
+
+name = sys.argv[1]
+
 with open("scene.ppm") as file:
     # Read header P3
     header = file.readline()
@@ -17,4 +24,6 @@ with open("scene.ppm") as file:
     for i in range(0, len(lines), 3):
         pixels.append((int(lines[i]), int(lines[i+1]), int(lines[i+2])))
     img.putdata(pixels)
-    img.save("render.png")
+    # Create renders folder if it doesn't exist
+    os.makedirs("renders", exist_ok=True)
+    img.save(f"renders/default{name}.png")

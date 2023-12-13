@@ -10,10 +10,10 @@ rem Get the source file from the command-line argument
 set "source_file=%~1"
 
 rem Compile C++ code
-g++ raytracer.cpp cameras/*.cpp geometry/*.cpp materials/*.cpp samplers/*.cpp utilities/*.cpp world/*.cpp build/"%source_file%".cpp -o a.exe
+g++ raytracer.cpp cameras/*.cpp geometry/*.cpp materials/*.cpp samplers/*.cpp utilities/*.cpp world/*.cpp build/"build%source_file%".cpp -o a.exe
 
 rem Run the compiled C++ program
 a.exe
 
 rem Run the Python script
-python convert.py
+python convert.py %source_file%
