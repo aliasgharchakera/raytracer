@@ -17,3 +17,9 @@ a.exe
 
 rem Run the Python script
 python convert.py %source_file%
+
+rem Delete the compiled C++ program
+del a.exe
+
+rem Delete the ppm file
+del scene.ppm
