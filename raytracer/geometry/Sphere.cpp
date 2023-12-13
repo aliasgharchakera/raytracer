@@ -27,8 +27,7 @@ std::string Sphere::to_string() const {
 }
 
 // Ray intersection. Set t and sinfo as per intersection with this object.
-// REVIEW: Works for now, but not sure if this would work with other objects
-bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &sinfo) const {
+bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &s) const {
   double a = ray.d*(ray.d);
   double b = 2 * ray.d*(ray.o - c);
   double d = (ray.o - c)*(ray.o - c) - r * r;
@@ -45,21 +44,23 @@ bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &sinfo) const {
   if (t0 > t1) {
     std::swap(t0, t1);
   }
-
+  // Checking first intersection
   if (t0 < kEpsilon) {
     t0 = t1;
+    // Checking second intersection
     if (t0 < kEpsilon) {
       return false;
     }
   }
 
   t = t0;
-  sinfo.hit = true;
-  sinfo.hit_point = ray.o + t * ray.d;
-  sinfo.normal = (sinfo.hit_point - c) / r;
-  sinfo.ray = ray;
-  sinfo.t = t;
-  sinfo.material_ptr = material_ptr;
+  s.hit = true;
+  s.hit_point = ray.o + t * ray.d;
+  s.normal = (s.hit_point - c) / r;
+  s.normal.normalize();
+  s.ray = ray;
+  s.t = t;
+  s.material_ptr = material_ptr;
 
   return true;
 

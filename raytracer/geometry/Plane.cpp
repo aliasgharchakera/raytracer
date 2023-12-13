@@ -29,31 +29,27 @@ std::string Plane::to_string() const {
   return oss.str();
 }
 
-// FIXME: Somewhat corrected but still not working correctly
+// Ray intersection. set t and sinfo as per intersection with this object.
 bool Plane::hit(const Ray &ray, float &t, ShadeInfo &s) const {
-  float denom = ray.d*(n);
+  float t_hit = (a - ray.o) * n / (ray.d * n); 
+														
+	if (t_hit > kEpsilon) {
+		t = t_hit;
+		s.normal = n;
+		s.normal.normalize();
+		s.hit_point = ray.o + t * ray.d;
+		s.ray = ray;
+		s.t = t;
+    s.material_ptr = material_ptr;
+    s.hit = true;
+		
+		return true;	
+	}
 
-  // Check if the ray is parallel to the plane.
-  if (denom == 0) {
-    return false;
-  }
-
-  float t_hit = (a - ray.o)*(n) / denom;
-
-  // Check if the intersection is behind the ray origin or beyond the current hit point.
-  if (t_hit < kEpsilon || t_hit >= t) {
-    return false;
-  }
-
-  // Update the hit information.
-  t = t_hit;
-  s.hit_point = ray.o + t_hit * ray.d;
-  s.normal = n;
-  s.material_ptr = material_ptr;
-
-  return true;
+	return false;
 }
 
+// Get bounding box.
 BBox Plane::getBBox() const {
   return BBox();
 }

@@ -7,6 +7,8 @@
    Courtesy Kevin Suffern.
 */
 
+#include <iostream>
+
 #include "Geometry.hpp"
 
 class Plane : public Geometry {
