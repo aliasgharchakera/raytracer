@@ -1,12 +1,14 @@
 import sys
 from PIL import Image
 import os
-# Check if command line argument is provided
+
+# Check if command line arguments are provided
 if len(sys.argv) < 2:
     print("Please provide a name as a command line argument.")
     sys.exit(1)
 
 name = sys.argv[1]
+sub_folder = sys.argv[2] if len(sys.argv) >= 3 else "default"
 
 with open("scene.ppm") as file:
     # Read header P3
@@ -26,4 +28,5 @@ with open("scene.ppm") as file:
     img.putdata(pixels)
     # Create renders folder if it doesn't exist
     os.makedirs("renders", exist_ok=True)
-    img.save(f"renders/default{name}.png")
+    os.makedirs(f"renders/{sub_folder}", exist_ok=True)
+    img.save(f"renders/{sub_folder}/{name}.png")
