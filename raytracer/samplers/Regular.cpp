@@ -34,15 +34,16 @@ std::vector<Ray> Regular::get_rays(int px, int py) const {
   float y = viewplane_ptr->top_left.y + ywidth * py + ywidth / 2;
   float z = viewplane_ptr->top_left.z;
 
-  // Set the ray weight, origin, and direction.
+  // Set the ray weight.
   ray.w = 1.0 / (n * n);
-  ray.o = Point3D(x, y, z);
 
   // Shoot n^2 rays through the subpixels.
   for (int i = 0; i < n; i++) {
     float xsub = x - xwidth / 2 + xsubwidth / 2 + xsubwidth * i;
     for (int j = 0; j < n; j++) {
       float ysub = y - ywidth / 2 + ysubwidth / 2 + ysubwidth * j;
+			// Set the ray origin at the center of the subpixel.
+      ray.o = Point3D(xsub, ysub, z);
       ray.d = camera_ptr->get_direction(Point3D(xsub, ysub, z));
       rays.push_back(ray);
     }
