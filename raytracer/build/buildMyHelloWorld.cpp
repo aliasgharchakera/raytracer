@@ -15,6 +15,7 @@
 
 #include "../samplers/Simple.hpp"
 #include "../samplers/Regular.hpp"
+#include "../samplers/Random.hpp"
 
 #include "../utilities/Constants.hpp"
 
@@ -37,7 +38,7 @@ World::build(void) {
   
   // Camera and sampler.
   set_camera(new Perspective(0, 0, 20));
-  sampler_ptr = new Regular(camera_ptr, &vplane, 5);
+  sampler_ptr = new Random(camera_ptr, &vplane, 5);
 	
   // sphere
   Sphere* sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5); 
