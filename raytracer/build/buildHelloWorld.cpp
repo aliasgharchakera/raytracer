@@ -31,7 +31,7 @@ World::build(void) {
   vplane.hres = 400;
   vplane.vres = 400;
 
-  // Background color.  
+// Background color.  
   bg_color = black;
   
   // Camera and sampler.
