@@ -50,6 +50,7 @@ public:
   virtual bool hit(const Ray &ray, float &t, ShadeInfo &sinfo) const = 0;
 
   // Check if shadow ray hits the object.
+  // HACK: This is a hack. We should be able to use the hit function to do this.
   virtual bool shadow_hit(const Ray &ray, float &tmin) const = 0;
 
   // Get bounding box.

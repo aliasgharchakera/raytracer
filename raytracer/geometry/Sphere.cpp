@@ -67,6 +67,7 @@ bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &s) const {
 }
 
 // Check if shadow ray hits the sphere.
+// HACK: Merge hit and shadow_hit to reduce redundancy
 bool Sphere::shadow_hit(const Ray &ray, float &tmin) const {
   double a = ray.d * ray.d;
   double b = 2 * ray.d * (ray.o - c);
