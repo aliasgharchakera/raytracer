@@ -51,9 +51,15 @@ bool Plane::hit(const Ray &ray, float &t, ShadeInfo &s) const {
 
 // Check if shadow ray hits the plane.
 bool Plane::shadow_hit(const Ray &ray, float &tmin) const {
-	return false;
-}
+  float t_hit = (a - ray.o) * n / (ray.d * n);
 
+  if (t_hit > kEpsilon) {
+    tmin = t_hit;
+    return true;
+  }
+
+  return false;
+}
 // Get bounding box.
 BBox Plane::getBBox() const {
   return BBox();

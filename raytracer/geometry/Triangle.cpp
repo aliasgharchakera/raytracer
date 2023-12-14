@@ -77,7 +77,39 @@ bool Triangle::hit(const Ray &ray, float &t, ShadeInfo &s) const {
 
 // Check if shadow ray hits the triangle.
 bool Triangle::shadow_hit(const Ray &ray, float &tmin) const {
-	return false;
+	double a = v0.x - v1.x, b = v0.x - v2.x, c = ray.d.x, d = v0.x - ray.o.x; 
+	double e = v0.y - v1.y, f = v0.y - v2.y, g = ray.d.y, h = v0.y - ray.o.y;
+	double i = v0.z - v1.z, j = v0.z - v2.z, k = ray.d.z, l = v0.z - ray.o.z;
+		
+	double m = f * k - g * j, n = h * k - g * l, p = f * l - h * j;
+	double q = g * i - e * k, u = e * j - f * i;
+	
+	double inv_denom  = 1.0 / (a * m + b * q + c * u);
+	
+	double e1 = d * m - b * n - c * p;
+	double beta = e1 * inv_denom;
+	
+	if (beta < 0.0)
+		return false;
+	
+	double r = e * l - h * i;
+	double e2 = a * n + d * q + c * r;
+	double gamma = e2 * inv_denom;
+	
+	if (gamma < 0.0 )
+		return false;
+	
+	if (beta + gamma > 1.0)
+		return false;
+			
+	double e3 = a * p - b * r + d * u;
+	double curr_t = e3 * inv_denom;
+	
+	if (curr_t < kEpsilon)  
+		return false;
+					
+	tmin = curr_t;
+	return true;
 }
 
 // Get bounding box.
