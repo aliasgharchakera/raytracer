@@ -15,6 +15,7 @@
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../utilities/Vector3D.hpp"
+#include "../world/World.hpp"
 
 class Cosine : public Material {
 protected:

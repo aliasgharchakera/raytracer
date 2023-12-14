@@ -49,6 +49,9 @@ public:
   // Ray intersection. Set t and sinfo as per intersection with this object.
   virtual bool hit(const Ray &ray, float &t, ShadeInfo &sinfo) const = 0;
 
+  // Check if shadow ray hits the object.
+  virtual bool shadow_hit(const Ray &ray, float &tmin) const = 0;
+
   // Get bounding box.
   virtual BBox getBBox() const = 0;
 };

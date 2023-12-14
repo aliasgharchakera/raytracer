@@ -54,6 +54,9 @@ public:
   void add_light(Light *light_ptr);
   void set_camera(Camera *c_ptr);
 
+  // Checks if the given ray is shadowed by any geometry in the scene.
+  virtual bool is_shadowed(const Ray &ray, const ShadeInfo &sinfo) const;
+
   // Build scene - add all geometry, materials, lights, viewplane, camera,
   // samplers, and acceleration structures
   void build();

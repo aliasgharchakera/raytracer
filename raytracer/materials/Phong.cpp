@@ -61,3 +61,8 @@ RGBColor Phong::shade(const ShadeInfo &sinfo) const {
 
   return color * (ka + kd * (sinfo.normal * -sinfo.ray.d) + ks * pow(cos_alpha, exp));
 }
+
+// Get normal.
+Vector3D Phong::get_normal(const ShadeInfo &sinfo) const {
+  return sinfo.normal;
+}
