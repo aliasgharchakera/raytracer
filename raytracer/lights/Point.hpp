@@ -21,20 +21,20 @@ public:
   Point &operator=(const Point &rhs) = default;
 
   // Destructor.
-  ~Point() = default;
+  virtual ~Point() = default;
 
   // String representation.
-  std::string to_string() const override;
+  virtual std::string to_string() const override;
 
   // Returns the direction from the hit point to the light source.
-  Vector3D get_direction(const ShadeInfo &sinfo) const override;
+  virtual Vector3D get_direction(const ShadeInfo &sinfo) const override;
 
   // Returns the radiance along the direction from the hit point to the light source.
-  RGBColor L(const ShadeInfo &sinfo) const override;
+  virtual RGBColor L(const ShadeInfo &sinfo) const override;
 
   // Returns the distance from the hit point to the light source.
-  float get_distance(const ShadeInfo &sinfo) const override;
+  virtual float get_distance(const ShadeInfo &sinfo) const override;
 
   // Returns the shadow ray from the hit point to the light source.
-  Ray get_shadow_ray(const ShadeInfo &sinfo) const override;
+  virtual Ray get_shadow_ray(const ShadeInfo &sinfo) const override;
 };
