@@ -75,6 +75,11 @@ bool Triangle::hit(const Ray &ray, float &t, ShadeInfo &s) const {
 	return true;	
 }
 
+// Check if shadow ray hits the triangle.
+bool Triangle::shadow_hit(const Ray &ray, float &tmin) const {
+	return false;
+}
+
 // Get bounding box.
 BBox Triangle::getBBox() const {
   return BBox(min(min(v0, v1), v2), max(max(v0, v1), v2));

@@ -66,6 +66,38 @@ bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &s) const {
 
 }
 
+// Check if shadow ray hits the sphere.
+bool Sphere::shadow_hit(const Ray &ray, float &tmin) const {
+  double a = ray.d * ray.d;
+  double b = 2 * ray.d * (ray.o - c);
+  double d = (ray.o - c) * (ray.o - c) - r * r;
+
+  double discriminant = b * b - 4 * a * d;
+
+  if (discriminant < 0) {
+    return false;
+  }
+
+  double t0 = (-b - sqrt(discriminant)) / (2 * a);
+  double t1 = (-b + sqrt(discriminant)) / (2 * a);
+
+  if (t0 > t1) {
+    std::swap(t0, t1);
+  }
+
+  if (t0 > kEpsilon) {
+    tmin = t0;
+    return true;
+  }
+
+  if (t1 > kEpsilon) {
+    tmin = t1;
+    return true;
+  }
+
+  return false;
+}
+
 // Get bounding box.
 BBox Sphere::getBBox() const {
   Point3D minPoint(c.x - r, c.y - r, c.z - r);
