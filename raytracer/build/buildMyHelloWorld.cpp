@@ -11,6 +11,8 @@
 #include "../geometry/Sphere.hpp"
 #include "../geometry/Triangle.hpp"
 
+#include "../lights/Point.hpp"
+
 #include "../materials/Cosine.hpp"
 
 #include "../samplers/Simple.hpp"
@@ -58,5 +60,10 @@ World::build(void) {
   Plane* plane_ptr = new Plane(Point3D(0,1,0), Vector3D(0, 10, 2)); 
   plane_ptr->set_material(new Cosine(green));  // green
   add_geometry(plane_ptr);
+
+  // light
+  Point* light_ptr = new Point(Point3D(0, 10, 10));
+  add_light(light_ptr);
+
   printf("My Hello World!\n");
 }

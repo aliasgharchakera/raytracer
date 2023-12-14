@@ -26,6 +26,10 @@ void World::add_geometry(Geometry *geom_ptr) {
   geometry.push_back(geom_ptr);
 }
 
+void World::add_light(Light *light_ptr) {
+  lights.push_back(light_ptr);
+}
+
 void World::set_camera(Camera *c_ptr) {
   camera_ptr = c_ptr;
 }
@@ -40,12 +44,8 @@ ShadeInfo World::hit_objects(const Ray &ray) {
 
   for (int i = 0; i < num_objects; i++) {
     if (geometry[i]->hit(ray, t, sinfo) && (t < tmin)) {
-      // sinfo.hit = true;
       tmin = t;
       sinfo_min = sinfo;
-      // sinfo.material_ptr = geometry[i]->get_material();
-      // sinfo.hit_point = ray.o + t * ray.d;
-      // sinfo.normal = sinfo.material_ptr->get_normal(sinfo);
     }
   }
 

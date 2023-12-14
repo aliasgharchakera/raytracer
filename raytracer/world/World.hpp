@@ -23,6 +23,7 @@
 #include "../cameras/Camera.hpp"
 #include "../samplers/Sampler.hpp"
 #include "../materials/Material.hpp"
+#include "../lights/Light.hpp"
 
 #include "ViewPlane.hpp"
 
@@ -37,6 +38,7 @@ public:
   ViewPlane vplane;
   RGBColor bg_color;
   std::vector<Geometry *> geometry;
+  std::vector<Light *> lights;
   Camera *camera_ptr;
   Sampler *sampler_ptr;
 
@@ -49,6 +51,7 @@ public:
 
   // Add to the scene.
   void add_geometry(Geometry *geom_ptr);
+  void add_light(Light *light_ptr);
   void set_camera(Camera *c_ptr);
 
   // Build scene - add all geometry, materials, lights, viewplane, camera,
