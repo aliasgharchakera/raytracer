@@ -28,7 +28,7 @@ public:
   Matte &operator=(const Matte &other);
 
   // Desctructor.
-  virtual ~Matte() = default;
+  ~Matte() = default;
 
   // Set ambient coefficient.
   void set_ka(float k);
@@ -40,8 +40,8 @@ public:
      \theta is the angle between the normal at the hit pont and the ray.
      Assuming unit vectors, cos \theta = dot product of normal and -ray.dir.
   */
-  virtual RGBColor shade(const ShadeInfo &sinfo) const override;
+  RGBColor shade(const ShadeInfo &sinfo) const override;
 
   // Get normal.
-  virtual Vector3D get_normal(const ShadeInfo &sinfo) const override;
+  Vector3D get_normal(const ShadeInfo &sinfo) const override;
 };

@@ -30,7 +30,6 @@ public:
   // Copy constuctor and assignment operator.
   Cosine(const Cosine &other);
   Cosine &operator=(const Cosine &other);
-  virtual Cosine* clone() const override;
 
   // Desctructor.
   virtual ~Cosine() = default;

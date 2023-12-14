@@ -19,7 +19,6 @@ public:
   // Copy constuctor and assignment operator.
   Material(const Material &other) = default;
   Material &operator=(const Material &other) = default;
-  virtual Material* clone() const = 0;
 
   // Desctructor.
   virtual ~Material() = default;

@@ -33,3 +33,17 @@ void Matte::set_ka(float k) {
 void Matte::set_kd(float k) {
   kd = k;
 }
+
+/* Returned shade is: color * (ka + kd * cos \theta).
+   \theta is the angle between the normal at the hit pont and the ray.
+   Assuming unit vectors, cos \theta = dot product of normal and -ray.dir.
+*/
+RGBColor Matte::shade(const ShadeInfo &sinfo) const {
+  // color * (ka + kd * cos \theta) (cos \theta: dot product of normal and -ray.dir) 
+  return color * (ka + kd * (sinfo.normal * -sinfo.ray.d));
+}
+
+// Get normal.
+Vector3D Matte::get_normal(const ShadeInfo &sinfo) const {
+  return sinfo.normal;
+}

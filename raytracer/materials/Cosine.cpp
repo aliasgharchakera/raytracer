@@ -22,10 +22,6 @@ Cosine &Cosine::operator=(const Cosine &other) {
   return *this;
 }
 
-Cosine* Cosine::clone() const {
-    return (new Cosine(*this));
-}
-
 RGBColor Cosine::shade(const ShadeInfo &sinfo) const {
   // color * cos \theta (cos \theta: dot product of normal and -ray.dir) 
   return color * (sinfo.normal * -sinfo.ray.d);
