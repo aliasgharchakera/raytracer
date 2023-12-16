@@ -18,9 +18,6 @@ Lambertian &Lambertian::operator=(const Lambertian &rhs) {
   return *this;
 }
 
-// Destructor.
-Lambertian::~Lambertian() = default;
-
 // f function.
 RGBColor Lambertian::f(const ShadeInfo &sinfo, const Vector3D &wi, const Vector3D &wo) const {
   return kd * cd * invPI;
@@ -57,8 +54,3 @@ void Lambertian::set_cd(const float r, const float g, const float b) {
 void Lambertian::set_cd(const float c) {
   this->cd = RGBColor(c, c, c);
 }
-
-Lambertian* Lambertian::clone(void) const {
-  return new Lambertian(*this);
-}
-

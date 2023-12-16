@@ -60,8 +60,3 @@ void PerfectSpecular::set_cr(const float r, const float g, const float b) {
 void PerfectSpecular::set_cr(const float c) {
   this->cr = RGBColor(c, c, c);
 }
-
-PerfectSpecular* PerfectSpecular::clone(void) const {
-  return new PerfectSpecular(*this);
-}
-

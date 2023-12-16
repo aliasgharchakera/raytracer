@@ -42,5 +42,5 @@ public:
   // Get rays corresponding to a pixel in the view plane. px and py are 0-based
   // indexes of the pixel in the view plane, with the origin at the top left of
   // the view plane.
-  virtual std::vector<Ray> get_rays(int px, int py) const = 0;
+  virtual std::vector<Ray> get_rays(int px, int py) const;
 };

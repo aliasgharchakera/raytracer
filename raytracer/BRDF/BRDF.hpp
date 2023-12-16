@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+   This file declares the BRDF class which is an abstract class from which
+   other concrete BRDFs will inherit.
+*/
+
 #include <sstream>
 
 #include "../utilities/RGBColor.hpp"
@@ -18,9 +23,6 @@ public:
   BRDF(const BRDF &brdf) = default;
   BRDF &operator=(const BRDF &rhs) = default;
 
-  virtual BRDF*
-		clone(void)const = 0;
-
   // Destructor.
   virtual ~BRDF() = default;
 
@@ -36,5 +38,4 @@ public:
 
   // Rho function.
   virtual RGBColor rho(const ShadeInfo &sinfo, const Vector3D &wo) const = 0;
-
 };
