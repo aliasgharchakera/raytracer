@@ -29,7 +29,7 @@ RGBColor Cosine::shade(const ShadeInfo &sinfo) const {
     Ray shadowRay(sinfo.hit_point, lightDir);
 
     if (sinfo.w->is_shadowed(shadowRay, sinfo)) {
-      shade *= 0.5; // Apply shadow factor
+      shade *= 0.75; // Apply shadow factor
     }
   }
 

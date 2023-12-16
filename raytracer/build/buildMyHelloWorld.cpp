@@ -70,8 +70,8 @@ World::build(void) {
   Point* light_ptr = new Point(Point3D(-10, 10, 10));
   add_light(light_ptr);
 
-  Point* light_ptr2 = new Point(Point3D(-10, 10, -10));
-  add_light(light_ptr2);
+  // Point* light_ptr2 = new Point(Point3D(-10, 10, -10));
+  // add_light(light_ptr2);
 
   printf("My Hello World!\n");
 }
