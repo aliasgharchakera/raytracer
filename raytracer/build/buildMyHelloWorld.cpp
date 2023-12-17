@@ -55,7 +55,7 @@ World::build(void) {
   // sphere_matte_ptr->set_kd(0.1);
 
   // phong sphere
-  Phong* sphere_phong_ptr = new Phong();
+  Phong* sphere_phong_ptr = new Phong(red);
   sphere_phong_ptr->set_ka(0.25);
   sphere_phong_ptr->set_kd(0.65);
   sphere_phong_ptr->set_ks(0.25);
