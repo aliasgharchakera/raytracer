@@ -19,6 +19,11 @@ World::~World() {
     delete g;
     g = NULL;
   }
+
+  if (acceleration_ptr) {
+    delete acceleration_ptr;
+    acceleration_ptr = NULL;
+  }
 }
 
 // Add to the scene.
@@ -56,6 +61,10 @@ bool World::is_shadowed(const Ray &ray, const ShadeInfo &sinfo) const {
 // Returns appropriate shading information corresponding to intersection of
 // the ray with the scene geometry.
 ShadeInfo World::hit_objects(const Ray &ray) {
+
+  // if (acceleration_ptr != NULL)
+  //   return acceleration_ptr->hit_objects(ray);
+
   ShadeInfo sinfo(*this), sinfo_min(*this);
   float t;
   float tmin = std::numeric_limits<float>::max();
