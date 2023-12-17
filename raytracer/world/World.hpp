@@ -41,6 +41,7 @@ public:
   std::vector<Light *> lights;
   Camera *camera_ptr;
   Sampler *sampler_ptr;
+  Light* ambient_ptr;
 
 public:
   // Constructors.

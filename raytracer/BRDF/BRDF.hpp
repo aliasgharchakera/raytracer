@@ -6,25 +6,29 @@
 */
 
 #include <sstream>
+#include <math.h>
+#include <random>
 
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../samplers/Sampler.hpp"
+#
 
 class BRDF {
 protected:
   Sampler *sampler_ptr;
+  float exp;
 
 public:
   // Constructors.
   BRDF(void);
 
   // Copy constructor and assignment operator.
-  BRDF(const BRDF &brdf) = default;
-  BRDF &operator=(const BRDF &rhs) = default;
+  BRDF(const BRDF &brdf);
+  BRDF &operator=(const BRDF &rhs) ;
 
   // Destructor.
-  virtual ~BRDF() = default;
+  virtual ~BRDF();
 
   // Set sampler.
   void set_sampler(Sampler *s_ptr);
@@ -38,4 +42,6 @@ public:
 
   // Rho function.
   virtual RGBColor rho(const ShadeInfo &sinfo, const Vector3D &wo) const = 0;
+
+  Point3D sample_hemisphere() const;
 };

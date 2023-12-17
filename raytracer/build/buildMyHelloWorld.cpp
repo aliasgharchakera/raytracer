@@ -45,12 +45,15 @@ World::build(void) {
   sampler_ptr = new Jittered(camera_ptr, &vplane, 5);
 	
   // sphere
-  Matte* sphere_matte_ptr = new Matte(red);
-  sphere_matte_ptr->set_ka(0.1);
-  sphere_matte_ptr->set_kd(0.1);
+  Matte* sphere_matte_ptr = new Matte();
+  sphere_matte_ptr->set_ka(0.25);
+  sphere_matte_ptr->set_kd(0.65);
+  sphere_matte_ptr->set_cd(1, 1, 0);
+  // sphere_matte_ptr->set_ka(0.1);
+  // sphere_matte_ptr->set_kd(0.1);
 
   Sphere* sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5); 
-  sphere_ptr->set_material(new Cosine(red));
+  sphere_ptr->set_material(sphere_matte_ptr);
   add_geometry(sphere_ptr);
   
   // triangle

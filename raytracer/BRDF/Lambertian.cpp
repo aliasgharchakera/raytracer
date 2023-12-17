@@ -24,7 +24,21 @@ RGBColor Lambertian::f(const ShadeInfo &sinfo, const Vector3D &wi, const Vector3
 }
 
 // Sample f function.
-//TODO implement this
+RGBColor Lambertian::sample_f(const ShadeInfo &sinfo,const Vector3D &wo, Vector3D &wi) const {
+  // Generate a random direction on the hemisphere.
+  Vector3D w = sinfo.normal;
+  Vector3D v = Vector3D(0.0034, 1.0, 0.0071) ^ (w);
+  v.normalize();
+  Vector3D u = v ^ (w);
+
+  Point3D sp = BRDF::sample_hemisphere();
+  wi = u * sp.x + v * sp.y + w * sp.z;
+  wi.normalize();
+
+  // Return the result of the Lambertian reflection model.
+  return kd * cd * invPI;
+}
+
 RGBColor Lambertian::sample_f(const ShadeInfo &sinfo,const Vector3D &wo, Vector3D &wi, float& pdf) const {
   // Generate a random direction on the hemisphere.
   Vector3D w = sinfo.normal;
@@ -32,7 +46,7 @@ RGBColor Lambertian::sample_f(const ShadeInfo &sinfo,const Vector3D &wo, Vector3
   v.normalize();
   Vector3D u = v ^ (w);
 
-  Point3D sp = sampler_ptr->sample_hemisphere();
+  Point3D sp = BRDF::sample_hemisphere();
   wi = u * sp.x + v * sp.y + w * sp.z;
   wi.normalize();
 

@@ -13,6 +13,8 @@
 */
 
 #include <vector>
+#include <math.h>
+#include <cstdlib>
 
 #include "../world/ViewPlane.hpp"
 #include "../cameras/Camera.hpp"
@@ -23,24 +25,25 @@ class Ray;
 class ViewPlane;
 
 class Sampler {
-protected:
-  Camera *camera_ptr;       // the camera that decides the projectors.
-  ViewPlane *viewplane_ptr; // the view plane through which rays are shot.
 
-public:
-  // Constructors.
-  Sampler();                                // initializes members to NULL.
-  Sampler(Camera *c_ptr, ViewPlane *v_ptr); // set members.
+  protected:
+    Camera *camera_ptr;       // the camera that decides the projectors.
+    ViewPlane *viewplane_ptr; // the view plane through which rays are shot.
 
-  // Copy constuctor and assignment operator.
-  Sampler(const Sampler &camera) = default;
-  Sampler &operator=(const Sampler &other) = default;
+  public:
+    // Constructors.
+    Sampler();                                // initializes members to NULL.
+    Sampler(Camera *c_ptr, ViewPlane *v_ptr); // set members.
 
-  // Desctructor.
-  virtual ~Sampler() = default;
+    // Copy constuctor and assignment operator.
+    Sampler(const Sampler &camera) = default;
+    Sampler &operator=(const Sampler &other) = default;
 
-  // Get rays corresponding to a pixel in the view plane. px and py are 0-based
-  // indexes of the pixel in the view plane, with the origin at the top left of
-  // the view plane.
-  virtual std::vector<Ray> get_rays(int px, int py) const;
+    // Desctructor.
+    virtual ~Sampler() = default;
+
+    // Get rays corresponding to a pixel in the view plane. px and py are 0-based
+    // indexes of the pixel in the view plane, with the origin at the top left of
+    // the view plane.
+    virtual std::vector<Ray> get_rays(int px, int py) const;
 };
