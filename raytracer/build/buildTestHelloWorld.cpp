@@ -69,7 +69,7 @@ World::build(void) {
   Point* light_ptr2 = new Point(Point3D(-10, 10, -10));
   add_light(light_ptr2);
 
-  add_object("3dmodels/babar_azam.obj", sphere_phong_ptr);
+  add_object("monke.obj", sphere_phong_ptr);
 
   printf("My Hello World!\n");
 }

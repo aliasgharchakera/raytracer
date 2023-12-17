@@ -1,128 +1,116 @@
 #include "BBox.hpp"
-#include <algorithm>
-#include "../utilities/Constants.hpp"
 
-BBox::BBox(const Point3D& _most_negative,
-                         const Point3D& _most_positive)
-    : most_negative{Point3D(_most_negative)},
-      most_positive{Point3D(_most_positive)} {
-  // nothing else to do
-}
+// FIXME: Implement this class.
+// Constructors.
+BBox::BBox() : pmin(Point3D()), pmax(Point3D()) {}
 
-BBox BBox::merge(const BBox& other) const {
-  Point3D most_negative_ = min(most_negative, other.most_negative);
-  Point3D most_positive_ = max(most_positive, other.most_positive);
+BBox::BBox(const Point3D& min, const Point3D& max) : pmin(min), pmax(max) {}
 
-  return BBox(most_negative_, most_positive_);
-}
+// Copy constructor and assignment operator.
+BBox::BBox(const BBox &b) : pmin(b.pmin), pmax(b.pmax) {}
 
-int BBox::max_axis() const {
-  double x_length = most_positive.x - most_negative.x;
-  double y_length = most_positive.y - most_negative.y;
-  double z_length = most_positive.z - most_negative.z;
-
-  if (x_length >= y_length && x_length >= z_length) {
-    return X_AXIS;
+BBox &BBox::operator=(const BBox &rhs) {
+  if (this == &rhs) {
+    return *this;
   }
 
-  if (y_length >= x_length && y_length >= z_length) {
-    return Y_AXIS;
+  pmin = rhs.pmin;
+  pmax = rhs.pmax;
+
+  return *this;
+}
+
+// String representation.
+std::string BBox::to_string() const {
+  std::ostringstream oss;
+  oss << "BBox(" << pmin.to_string() << ", " << pmax.to_string() << ")";
+  return oss.str();
+}
+
+// Does ray hit bbox? If so, set entering and leaving t values for ray.
+bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const {
+  float tmin = (pmin.x - ray.o.x) / ray.d.x;
+  float tmax = (pmax.x - ray.o.x) / ray.d.x;
+
+  if (tmin > tmax) {
+    std::swap(tmin, tmax);
   }
 
-  return Z_AXIS;
-}
+  float tymin = (pmin.y - ray.o.y) / ray.d.y;
+  float tymax = (pmax.y - ray.o.y) / ray.d.y;
 
-bool BBox::intersect(const Point3D& point) const {
-  return ((min(most_negative, point) == most_negative) && (max(most_positive, point) == most_positive));
-}
-
-bool BBox::intersect(const BBox& other) const {
-  bool overlapping_x =
-      BBox::overlapping1D(most_negative.x, most_positive.x,
-                                 other.most_negative.x, other.most_positive.x);
-  bool overlapping_y =
-      BBox::overlapping1D(most_negative.y, most_positive.y,
-                                 other.most_negative.y, other.most_positive.y);
-  bool overlapping_z =
-      BBox::overlapping1D(most_negative.z, most_positive.z,
-                                 other.most_negative.z, other.most_positive.z);
-
-  return overlapping_x && overlapping_y && overlapping_z;
-}
-
-double BBox::volume() const {
-  Vector3D offset = most_positive - most_negative;
-  return offset.x * offset.y * offset.z;
-}
-
-bool BBox::hit(const Ray& ray) const {
-  // modified slightly from code by Kevin Suffern
-  double ox = ray.o.x;
-  double oy = ray.o.y;
-  double oz = ray.o.z;
-  double dx = ray.d.x;
-  double dy = ray.d.y;
-  double dz = ray.d.z;
-
-  double tx_min, ty_min, tz_min;
-  double tx_max, ty_max, tz_max;
-
-  double x0 = most_negative.x;
-  double x1 = most_positive.x;
-  double y0 = most_negative.y;
-  double y1 = most_positive.y;
-  double z0 = most_negative.z;
-  double z1 = most_positive.z;
-
-  double a = 1.0 / dx;
-  if (a >= 0) {
-    tx_min = (x0 - ox) * a;
-    tx_max = (x1 - ox) * a;
-  } else {
-    tx_min = (x1 - ox) * a;
-    tx_max = (x0 - ox) * a;
+  if (tymin > tymax) {
+    std::swap(tymin, tymax);
   }
 
-  double b = 1.0 / dy;
-  if (b >= 0) {
-    ty_min = (y0 - oy) * b;
-    ty_max = (y1 - oy) * b;
-  } else {
-    ty_min = (y1 - oy) * b;
-    ty_max = (y0 - oy) * b;
+  if ((tmin > tymax) || (tymin > tmax)) {
+    return false;
   }
 
-  double c = 1.0 / dz;
-  if (c >= 0) {
-    tz_min = (z0 - oz) * c;
-    tz_max = (z1 - oz) * c;
-  } else {
-    tz_min = (z1 - oz) * c;
-    tz_max = (z0 - oz) * c;
+  if (tymin > tmin) {
+    tmin = tymin;
   }
 
-  double t0, t1;
+  if (tymax < tmax) {
+    tmax = tymax;
+  }
 
-  // find largest entering t value
-  if (tx_min > ty_min)
-    t0 = tx_min;
-  else
-    t0 = ty_min;
+  float tzmin = (pmin.z - ray.o.z) / ray.d.z;
+  float tzmax = (pmax.z - ray.o.z) / ray.d.z;
 
-  if (tz_min > t0) t0 = tz_min;
+  if (tzmin > tzmax) {
+    std::swap(tzmin, tzmax);
+  }
 
-  // find smallest exiting t value
-  if (tx_max < ty_max)
-    t1 = tx_max;
-  else
-    t1 = ty_max;
+  if ((tmin > tzmax) || (tzmin > tmax)) {
+    return false;
+  }
 
-  if (tz_max < t1) t1 = tz_max;
+  if (tzmin > tmin) {
+    tmin = tzmin;
+  }
 
-  return (t0 < t1 && t1 > kEpsilon);
+  if (tzmax < tmax) {
+    tmax = tzmax;
+  }
+
+  t_enter = tmin;
+  t_exit = tmax;
+
+  return true;
 }
 
-bool BBox::overlapping1D(double min1, double max1, double min2,
-                                double max2) {
-  return (max1 >= min2 && max2 >= min1);
+// Extend this bbox, if necessary, to include g or b.
+void BBox::extend(Geometry* g) {
+  BBox b = g->getBBox();
+  extend(b);
+}
+
+void BBox::extend(const BBox& b) {
+  pmin.x = std::min(pmin.x, b.pmin.x);
+  pmin.y = std::min(pmin.y, b.pmin.y);
+  pmin.z = std::min(pmin.z, b.pmin.z);
+
+  pmax.x = std::max(pmax.x, b.pmax.x);
+  pmax.y = std::max(pmax.y, b.pmax.y);
+  pmax.z = std::max(pmax.z, b.pmax.z);
+}
+
+// Does this BBox contain p? True even when p lies on a boundary.
+bool BBox::contains(const Point3D& p) {
+  return (p.x >= pmin.x && p.x <= pmax.x &&
+          p.y >= pmin.y && p.y <= pmax.y &&
+          p.z >= pmin.z && p.z <= pmax.z);
+}
+
+// Does this BBox overlap with g or b?
+bool BBox::overlaps(Geometry* g) {
+  BBox b = g->getBBox();
+  return overlaps(b);
+}
+
+bool BBox::overlaps(const BBox& b) {
+  return (pmax.x >= b.pmin.x && pmin.x <= b.pmax.x &&
+          pmax.y >= b.pmin.y && pmin.y <= b.pmax.y &&
+          pmax.z >= b.pmin.z && pmin.z <= b.pmax.z);
 }
