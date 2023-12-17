@@ -1,116 +1,85 @@
 #include "Matte.hpp"
 
 // Constructors.
-Matte::Matte(){}
+Matte::Matte() : Material(), ambient_color(RGBColor(0)), diffuse_color(RGBColor(0)), ka(0), kd(0) {}
 
-Matte::Matte(const Matte &m) : Material(m) {
-  kd= m.kd;
-  cd = m.cd;
-}
+Matte::Matte(float c) : Material(), ambient_color(RGBColor(c)), diffuse_color(RGBColor(c)), ka(0), kd(0) {}
 
-// Copy assignment operator.
-Matte &Matte::operator=(const Matte &rhs) {
-  if (this == &rhs) {
+Matte::Matte(float r, float g, float b) : Material(), ambient_color(RGBColor(r, g, b)), diffuse_color(RGBColor(r, g, b)), ka(0), kd(0) {}
+
+Matte::Matte(const RGBColor &c) : Material(), ambient_color(c), diffuse_color(c), ka(0), kd(0) {}
+
+// Copy constuctor and assignment operator.
+Matte::Matte(const Matte &other) : Material(other), ambient_color(other.ambient_color), diffuse_color(other.diffuse_color), ka(other.ka), kd(other.kd) {}
+
+Matte &Matte::operator=(const Matte &other) {
+  if (this == &other) {
     return *this;
   }
 
-  Material::operator=(rhs);
+  Material::operator=(other);
 
-  if (ambient_brdf) {
-    delete ambient_brdf;
-    ambient_brdf = nullptr;
-  }
-
-  if (rhs.ambient_brdf) {
-    ambient_brdf = new Lambertian(*rhs.ambient_brdf);
-  }
-
-  if (diffuse_brdf) {
-    delete diffuse_brdf;
-    diffuse_brdf = nullptr;
-  }
-
-  if (rhs.diffuse_brdf) {
-    diffuse_brdf = new Lambertian(*rhs.diffuse_brdf);
-  }
+  ambient_color = other.ambient_color;
+  diffuse_color = other.diffuse_color;
+  ka = other.ka;
+  kd = other.kd;
 
   return *this;
 }
 
-// Destructor.
-Matte::~Matte() {
-  if (ambient_brdf) {
-    delete ambient_brdf;
-    ambient_brdf = nullptr;
-  }
-
-  if (diffuse_brdf) {
-    delete diffuse_brdf;
-    diffuse_brdf = nullptr;
-  }
+// Get/set ambient color.
+RGBColor Matte::get_ambient_color() const {
+  return ambient_color;
 }
 
-// Set ka.
-void Matte::set_ka(float k) {
-  // ambient_brdf->set_kd(k);
-  set_ka(k);
+void Matte::set_ambient_color(const RGBColor &c) {
+  ambient_color = c;
 }
 
-// Set kd.
+// Get/set diffuse color.
+RGBColor Matte::get_diffuse_color() const {
+  return diffuse_color;
+}
+
+void Matte::set_diffuse_color(const RGBColor &c) {
+  diffuse_color = c;
+}
+
+// Get/set diffuse coefficient.
+float Matte::get_kd() const {
+  return kd;
+}
+
 void Matte::set_kd(float k) {
-  // diffuse_brdf->set_kd(k);
-  set_kd(k);
+  kd = k;
 }
 
-// Set cd.
-void Matte::set_cd(const RGBColor c) {
-  // ambient_brdf->set_cd(c);
-  // diffuse_brdf->set_cd(c);
-  set_cd(c);
+// Get/set ambient coefficient.
+float Matte::get_ka() const {
+  return ka;
 }
 
-// Set cd.
-void Matte::set_cd(float r, float g, float b) {
-  // ambient_brdf->set_cd(r, g, b);
-  // diffuse_brdf->set_cd(r, g, b);
-  set_cd(r, g, b);
+void Matte::set_ka(float k) {
+  ka = k;
 }
 
-// Set cd.
-void Matte::set_cd(float c) {
-  // ambient_brdf->set_cd(c);
-  // diffuse_brdf->set_cd(c);
-  set_cd(c);
-}
+RGBColor Matte::shade(const ShadeInfo &sinfo) const {
+  RGBColor shade = ambient_color * ka;
+  for (const auto& light : sinfo.w->lights) {
+    Vector3D lightDir = light->get_direction(sinfo);
+    Ray shadowRay(sinfo.hit_point, lightDir);
 
-// Shade function.
-RGBColor Matte::shade(const ShadeInfo& sinfo) const {
-  std::cout << "here";
-  Vector3D wo = -sinfo.ray.d;
-  RGBColor L = kd*cd;
-  // Light* check2 = sinfo.w->ambient_ptr->L(sinfo);
-  // std::cout << check2;
-  // RGBColor L = ambient_brdf->rho(sinfo, wo) * sinfo.w->ambient_ptr->L(sinfo);
-  // int num_lights = sinfo.w->lights.size();
-  // int num_lights = 0;
-  // for (int j = 0; j < num_lights; j++) {
-  //   Vector3D wi = sinfo.w->lights[j]->get_direction(sinfo);
-  //   float ndotwi = sinfo.normal * wi;
-  //   if (ndotwi > 0.0) {
-  //     bool in_shadow = false;
-  //     // if (sinfo.w->lights[j]->casts_shadows()) {
-  //     //   Ray shadow_ray(sinfo.hit_point, wi);
-  //     //   in_shadow = sinfo.w->lights[j]->in_shadow(shadow_ray, sinfo);
-  //     // }
-  //     if (!in_shadow) {
-  //       L += diffuse_brdf->f(sinfo, wo, wi) * sinfo.w->lights[j]->L(sinfo) * ndotwi;
-  //     }      
-  //   }
-  // }
-  return kd*cd;
+    if (sinfo.w->is_shadowed(shadowRay, sinfo)) {
+      shade *= 0.75; // Apply shadow factor
+    } else {
+      shade += diffuse_color * kd * (lightDir * sinfo.normal);
+    }
+  }
+
+  return shade;
 }
 
 // Get normal.
-Vector3D Matte::get_normal(const ShadeInfo& sinfo) const {
+Vector3D Matte::get_normal(const ShadeInfo &sinfo) const {
   return sinfo.normal;
 }

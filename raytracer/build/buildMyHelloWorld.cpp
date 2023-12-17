@@ -46,15 +46,15 @@ World::build(void) {
   sampler_ptr = new Jittered(camera_ptr, &vplane, 5);
 	
   // sphere
-  Matte* sphere_matte_ptr = new Matte();
+  Matte* sphere_matte_ptr = new Matte(red);
   sphere_matte_ptr->set_ka(0.25);
   sphere_matte_ptr->set_kd(0.65);
-  sphere_matte_ptr->set_cd(1, 0, 0);
+  // sphere_matte_ptr->set_cd(1, 0, 0);
   // sphere_matte_ptr->set_cd(1, 1, 0);
   // sphere_matte_ptr->set_ka(0.1);
   // sphere_matte_ptr->set_kd(0.1);
 
-  //phong sphere
+  // phong sphere
   Phong* sphere_phong_ptr = new Phong();
   sphere_phong_ptr->set_ka(0.25);
   sphere_phong_ptr->set_kd(0.65);
@@ -62,7 +62,8 @@ World::build(void) {
   sphere_phong_ptr->set_exp(100);
 
   Sphere* sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5); 
-  sphere_ptr->set_material(sphere_matte_ptr);
+  // sphere_ptr->set_material(sphere_matte_ptr);
+  sphere_ptr->set_material(sphere_phong_ptr);
   add_geometry(sphere_ptr);
   
   // triangle

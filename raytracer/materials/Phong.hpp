@@ -1,63 +1,76 @@
-#pragma once
-
-/**
-   This file declares the class Phong which represents a Phong material.
-*/
-
 #include "Material.hpp"
-
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
-#include "../utilities/Vector3D.hpp"
-#include "../BRDF/Lambertian.hpp"
-#include "../BRDF/GlossySpecular.hpp"
 #include "../world/World.hpp"
 
 class Phong : public Material {
-protected:
-  RGBColor color; // the color of the material.
-  float ka;       // ambient coefficient.
-  float kd;       // diffuse coefficient.
-  float ks;       // specular coefficient.
-  float exp;      // specular exponent.
-  Lambertian* ambient_brdf;
-  Lambertian* diffuse_brdf;
-  GlossySpecular* specular_brdf;
+  private:
+    // Ambient color.
+    RGBColor ambient_color;
 
-public:
-  // Constructors.
-  Phong();                          // set color to (0, 0, 0).
-  Phong(float c);                   // set color to (c, c, c).
-  Phong(float r, float g, float b); // set color to (r, g, b).
-  Phong(const RGBColor &c);         // set color to c.
+    // Diffuse color.
+    RGBColor diffuse_color;
 
-  // Copy constuctor and assignment operator.
-  Phong(const Phong &other);
-  Phong &operator=(const Phong &other);
+    // Specular color.
+    RGBColor specular_color;
 
-  // Desctructor.
-  ~Phong() = default;
+    // Ambient coefficient.
+    float ka;
 
-  // Set ambient coefficient.
-  void set_ka(float k);
+    // Diffuse coefficient.
+    float kd;
 
-  // Set diffuse coefficient.
-  void set_kd(float k);
+    // Specular coefficient.
+    float ks;
 
-  // Set specular coefficient.
-  void set_ks(float k);
+    // Specular exponent.
+    float exp;
+  
+  public:
+    // Constructors.
+    Phong();
+    Phong(float c);
+    Phong(float r, float g, float b);
+    Phong(const RGBColor &c);
 
-  // Set specular exponent.
-  void set_exp(float e);
+    // Copy constuctor and assignment operator.
+    Phong(const Phong &other);
+    Phong &operator=(const Phong &other);
 
-  /* Returned shade is: color * (ka + kd * cos \theta + ks * cos^n \alpha).
-     \theta is the angle between the normal at the hit pont and the ray.
-     \alpha is the angle between the reflection vector and the ray.
-     Assuming unit vectors, cos \theta = dot product of normal and -ray.dir.
-     cos^n \alpha = dot product of reflection vector and -ray.dir.
-  */
-  RGBColor shade(const ShadeInfo &sinfo) const override;
+    // Destructor.
+    ~Phong() = default;
 
-  // Get normal.
-  Vector3D get_normal(const ShadeInfo &sinfo) const override;
+    // Get/set ambient color.
+    RGBColor get_ambient_color() const;
+    void set_ambient_color(const RGBColor &c);
+
+    // Get/set diffuse color.
+    RGBColor get_diffuse_color() const;
+    void set_diffuse_color(const RGBColor &c);
+
+    // Get/set specular color.
+    RGBColor get_specular_color() const;
+    void set_specular_color(const RGBColor &c);
+
+    // Get/set diffuse coefficient.
+    float get_kd() const;
+    void set_kd(float k);
+
+    // Get/set ambient coefficient.
+    float get_ka() const;
+    void set_ka(float k);
+
+    // Get/set specular coefficient.
+    float get_ks() const;
+    void set_ks(float k);
+
+    // Get/set specular exponent.
+    float get_exp() const;
+    void set_exp(float e);
+
+    // shade function
+    virtual RGBColor shade(const ShadeInfo &sinfo) const override;
+
+    // Get normal.
+    virtual Vector3D get_normal(const ShadeInfo &sinfo) const override;
 };

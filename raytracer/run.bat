@@ -13,7 +13,7 @@ rem Get the file type from the command-line argument
 set "file_type=%~2"
 
 rem Compile C++ code
-g++ raytracer.cpp cameras/*.cpp geometry/*.cpp lights/*.cpp materials/*.cpp samplers/*.cpp BRDF/*.cpp utilities/*.cpp world/*.cpp build/"build%file_type%%source_file%".cpp -o a.exe
+g++ raytracer.cpp cameras/*.cpp geometry/*.cpp lights/*.cpp materials/*.cpp samplers/*.cpp utilities/*.cpp world/*.cpp build/"build%file_type%%source_file%".cpp -o a.exe
 
 rem Run the compiled C++ program
 a.exe

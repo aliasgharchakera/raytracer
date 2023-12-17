@@ -1,43 +1,56 @@
-#pragma once
-
-#include <iostream>
-
 #include "Material.hpp"
-#include "../BRDF/Lambertian.hpp"
+#include "../utilities/RGBColor.hpp"
+#include "../utilities/ShadeInfo.hpp"
 #include "../world/World.hpp"
-#include "../utilities/Constants.hpp"
 
-class Matte: public Material {	
-	public:
-			
-		Matte(void);											
+class Matte : public Material {
 
-		Matte(const Matte& m);		
+private:
+  // Ambient color.
+  RGBColor ambient_color;
 
-    // Matte(const RGBColor& c);						
+  // Diffuse color.
+  RGBColor diffuse_color;
 
-		Matte& operator= (const Matte& rhs);							
+  // Ambient coefficient.
+  float ka;
 
-		~Matte(void);											
-		
-		void set_ka(const float k);
-		
-		void set_kd(const float k);
-		
-		void set_cd(const RGBColor c);
-		
-		void set_cd(const float r, const float g, const float b);
-		
-		void set_cd(const float c);
-				
-		virtual RGBColor shade(const ShadeInfo& sr) const;
+  // Diffuse coefficient.
+  float kd;
 
-    virtual Vector3D get_normal(const ShadeInfo& sinfo) const;
-		
-	private:
-		
-		float kd;
-		RGBColor cd;
-    Lambertian* ambient_brdf;
-    Lambertian* diffuse_brdf;
+public:
+  // Constructors.
+  Matte();
+  Matte(float c);
+  Matte(float r, float g, float b);
+  Matte(const RGBColor &c);
+
+  // Copy constuctor and assignment operator.
+  Matte(const Matte &other);
+  Matte &operator=(const Matte &other);
+
+  // Destructor.
+  ~Matte() = default;
+
+  // Get/set ambient color.
+  RGBColor get_ambient_color() const;
+  void set_ambient_color(const RGBColor &c);
+
+  // Get/set diffuse color.
+  RGBColor get_diffuse_color() const;
+  void set_diffuse_color(const RGBColor &c);
+
+  // Get/set diffuse coefficient.
+  float get_kd() const;
+  void set_kd(float k);
+
+  // Get/set ambient coefficient.
+  float get_ka() const;
+  void set_ka(float k);
+
+  // shade function
+  virtual RGBColor shade(const ShadeInfo &sinfo) const override;
+
+  // Get normal.
+  virtual Vector3D get_normal(const ShadeInfo &sinfo) const override;
 };
