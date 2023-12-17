@@ -30,12 +30,12 @@
 void
 World::build(void) {
   // View plane  .
-  vplane.top_left.x = -10;
-  vplane.top_left.y = 10;
-  vplane.top_left.z = 10;
-  vplane.bottom_right.x = 10;
-  vplane.bottom_right.y = -10;
-  vplane.bottom_right.z = 10;
+  vplane.top_left.x = -1;
+  vplane.top_left.y = 1;
+  vplane.top_left.z = 2;
+  vplane.bottom_right.x = 1;
+  vplane.bottom_right.y = -1;
+  vplane.bottom_right.z = 2;
   vplane.hres = 400;
   vplane.vres = 400;
 
@@ -43,7 +43,7 @@ World::build(void) {
   bg_color = black;
   
   // Camera and sampler.
-  set_camera(new Perspective(0, 0, 20));
+  set_camera(new Perspective(0, 0, 10));
   sampler_ptr = new Jittered(camera_ptr, &vplane, 5);
 	
   // sphere
@@ -61,24 +61,6 @@ World::build(void) {
   sphere_phong_ptr->set_kd(0.75);
   sphere_phong_ptr->set_ks(0.9);
   sphere_phong_ptr->set_exp(10);
-
-  Sphere* sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5); 
-  // sphere_ptr->set_material(sphere_matte_ptr);
-  sphere_ptr->set_material(sphere_phong_ptr);
-  add_geometry(sphere_ptr);
-  
-  // triangle
-  Point3D a(2.5, -5, 1); 
-  Point3D b(14, -1, 0); 
-  Point3D c(8.5, 5, 0.5); 
-  Triangle* triangle_ptr = new Triangle(a, b, c);
-  triangle_ptr->set_material(new Cosine(blue));
-  add_geometry(triangle_ptr);
-
-  // plane
-  Plane* plane_ptr = new Plane(Point3D(0,1,0), Vector3D(0, 10, 2)); 
-  plane_ptr->set_material(new Cosine(green));  // green
-  add_geometry(plane_ptr);
 
   // light
   Point* light_ptr = new Point(Point3D(-10, 10, 10));

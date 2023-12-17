@@ -11,6 +11,7 @@
 */
 
 #include <vector>
+#include <cstring>
 
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
@@ -20,6 +21,7 @@
 #include "../utilities/Point3D.hpp"
 #include "../utilities/Vector3D.hpp"
 #include "../geometry/Geometry.hpp"
+#include "../geometry/Triangle.hpp"
 #include "../cameras/Camera.hpp"
 #include "../samplers/Sampler.hpp"
 #include "../materials/Material.hpp"
@@ -65,4 +67,7 @@ public:
   // Returns appropriate shading information corresponding to intersection of
   // the ray with the scene geometry.
   ShadeInfo hit_objects(const Ray &ray);
+
+  // add object
+  void add_object(const char *path, Material *mPtr);
 };
