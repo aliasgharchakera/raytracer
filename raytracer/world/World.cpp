@@ -34,6 +34,11 @@ void World::set_camera(Camera *c_ptr) {
   camera_ptr = c_ptr;
 }
 
+// set acceleration structure
+void World::set_acceleration(Acceleration* acceleration_ptr){
+  this->acceleration_ptr = acceleration_ptr;
+}
+
 // Checks if the given ray is shadowed by any geometry in the scene.
 bool World::is_shadowed(const Ray &ray, const ShadeInfo &sinfo) const {
   float t;

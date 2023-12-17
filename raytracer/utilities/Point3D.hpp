@@ -39,15 +39,19 @@ public:
   Point3D operator+(const Vector3D &v) const; // addition of a vector
   Point3D operator-(const Vector3D &v) const; // subtraction of a vector
   Point3D operator*(const float s) const;     // scale the point by a factor, s.
+  bool operator==(const Point3D &p) const; // equality of points
 
   // Distance between points.
   float d_squared(const Point3D &p) const; // square of distance
   float distance(const Point3D &p) const;  // distance
+
+    // Compare points.
 };
 
 // Scale pt by a factor, s.
 Point3D operator*(const float a, const Point3D &pt);
 
-// Compare points.
 Point3D min(const Point3D& a, const Point3D& b);
 Point3D max(const Point3D& a, const Point3D& b);
+
+

@@ -13,6 +13,7 @@
 #include <vector>
 #include <cstring>
 
+#include "../acceleration/Acceleration.hpp"
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../utilities/Constants.hpp"
@@ -44,6 +45,7 @@ public:
   Camera *camera_ptr;
   Sampler *sampler_ptr;
   Light* ambient_ptr;
+  Acceleration* acceleration_ptr;
 
 public:
   // Constructors.
@@ -56,6 +58,7 @@ public:
   void add_geometry(Geometry *geom_ptr);
   void add_light(Light *light_ptr);
   void set_camera(Camera *c_ptr);
+  void set_acceleration(Acceleration* acceleration_ptr);
 
   // Checks if the given ray is shadowed by any geometry in the scene.
   virtual bool is_shadowed(const Ray &ray, const ShadeInfo &sinfo) const;

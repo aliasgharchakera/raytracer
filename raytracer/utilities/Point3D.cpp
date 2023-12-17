@@ -23,6 +23,8 @@ Point3D Point3D::operator-(const Vector3D &v) const { return Point3D(x - v.x, y 
 
 Point3D Point3D::operator*(const float s) const { return Point3D(x * s, y * s, z * s); }
 
+bool Point3D::operator==(const Point3D &p) const { return (x == p.x && y == p.y && z == p.z); }
+
 // Distance between points.
 float Point3D::d_squared(const Point3D &p) const {
   return (x - p.x) * (x - p.x) + (y - p.y) * (y - p.y) + (z - p.z) * (z - p.z);

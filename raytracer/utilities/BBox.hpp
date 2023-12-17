@@ -1,50 +1,28 @@
-#pragma once
-
-/**
-   This file declares BBox class which represents an axis-aligned bounding box
-   defined by 2 points containing the min and max values respectively of x, y,
-   and z.
-*/
-
 #include "Point3D.hpp"
 #include "Ray.hpp"
-#include "../geometry/Geometry.hpp"
-
-class Geometry;
-class Ray;
+#include "Constants.hpp"
 
 class BBox {
-public:
-  // Diagonally opposite points.
-  Point3D pmin; // min coordinates.
-  Point3D pmax; // max coordinates.
+ public:
+  Point3D most_negative;
+  Point3D most_positive;
 
-public:
-  // Constructors.
-  BBox() = default; // both points at origin.
-  BBox(const Point3D& min, const Point3D& max); // set points.
+ public:
+  BBox() = default;
+  BBox(const Point3D& _most_negative, const Point3D& _most_positive);
 
-  // Copy constructor and assignment operator.
-  BBox(const BBox &b) = default;
-  BBox &operator=(const BBox &rhs) = default;
+  BBox merge(const BBox& other) const;
 
-  // Destructor.
-  ~BBox() = default;
+  int max_axis() const;
 
-  // String representation.
-  std::string to_string() const;
+  bool intersect(const Point3D& other) const;
 
-  // Does ray hit bbox? If so, set entering and leaving t values for ray.
-  bool hit(const Ray &ray, float &t_enter, float &t_exit) const;
+  bool intersect(const BBox& other) const;
 
-  // Extend this bbox, if necessary, to include g or b.
-  void extend(Geometry* g);
-  void extend(const BBox& b);
+  double volume() const;
 
-  // Does this BBox contain p? True even when p lies on a boundary.
-  bool contains(const Point3D& p);
-  
-  // Does this BBox overlap with g or b?
-  bool overlaps(Geometry* g);
-  bool overlaps(const BBox& b);
+  bool hit(const Ray& ray) const;
+
+ protected:
+  static bool overlapping1D(double min1, double max1, double min2, double max2);
 };
