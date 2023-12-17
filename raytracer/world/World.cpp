@@ -64,7 +64,7 @@ ShadeInfo World::hit_objects(const Ray &ray) {
 
   // if (acceleration_ptr != NULL)
   //   return acceleration_ptr->hit_objects(ray);
-
+  // std::cout << "No acceleration structure found\n";
   ShadeInfo sinfo(*this), sinfo_min(*this);
   float t;
   float tmin = std::numeric_limits<float>::max();

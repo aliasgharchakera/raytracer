@@ -69,7 +69,7 @@ World::build(void) {
   // Point* light_ptr2 = new Point(Point3D(-10, 10, -10));
   // add_light(light_ptr2);
 
-  add_object("cube.obj", new Cosine(red));
+  add_object("monke.obj", new Cosine(red));
 
   printf("My Hello World!\n");
 }

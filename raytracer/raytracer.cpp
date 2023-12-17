@@ -12,6 +12,8 @@
 #include "world/World.hpp"
 #include "world/ViewPlane.hpp"
 
+#include "acceleration/KDTree.hpp"
+
 int main(int argc, char **argv) {
   World world;
   world.build();
@@ -19,6 +21,7 @@ int main(int argc, char **argv) {
   Sampler *sampler = world.sampler_ptr;
   ViewPlane &viewplane = world.vplane;
   Image image(viewplane);
+  // world.set_acceleration(new KDTree(&world));
 
   std::vector<Ray> rays;
   for (int x = 0; x < viewplane.hres; x++) {   // across.
