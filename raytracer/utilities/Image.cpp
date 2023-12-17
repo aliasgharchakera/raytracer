@@ -1,5 +1,6 @@
-
 #include "Image.hpp"
+
+#include <iostream>
 #include <fstream>
 
 // Constructors.
@@ -43,4 +44,5 @@ void Image::write_ppm(std::string path) const {
     }
     file.close();
   }
+  std::cout << "Wrote image to " << path << ".\n";
 }

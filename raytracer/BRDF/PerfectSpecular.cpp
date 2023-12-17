@@ -3,6 +3,7 @@
 // Constructors.
 PerfectSpecular::PerfectSpecular() : BRDF(), kr(0), cr(0) {}
 
+// Copy constuctor and assignment operator.
 PerfectSpecular::PerfectSpecular(const PerfectSpecular &other) : BRDF(other), kr(other.kr), cr(other.cr) {}
 
 PerfectSpecular &PerfectSpecular::operator=(const PerfectSpecular &rhs) {

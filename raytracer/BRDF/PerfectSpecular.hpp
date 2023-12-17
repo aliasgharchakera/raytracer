@@ -12,10 +12,14 @@ private:
 
 public:
 	// Constructors.
-	PerfectSpecular(void);
+	PerfectSpecular();
+
+	// Copy constuctor and assignment operator.
+	PerfectSpecular(const PerfectSpecular& other);
+	PerfectSpecular& operator=(const PerfectSpecular& rhs);
 
 	// Destructor.
-	~PerfectSpecular(void);
+	~PerfectSpecular();
 
 	// Setters.
 	void set_kr(const float k);

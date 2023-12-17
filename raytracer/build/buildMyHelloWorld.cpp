@@ -53,7 +53,7 @@ World::build(void) {
   // sphere_matte_ptr->set_kd(0.1);
 
   Sphere* sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5); 
-  sphere_ptr->set_material(sphere_matte_ptr);
+  sphere_ptr->set_material(new Cosine(red));
   add_geometry(sphere_ptr);
   
   // triangle

@@ -30,16 +30,17 @@ RGBColor GlossySpecular::sample_f(const ShadeInfo &sinfo, const Vector3D &wo, Ve
   Vector3D v = u ^ w;
 
   // FIXME: This is from the book??? Why is it here?
-  Point3D sp = sampler_ptr->sample_hemisphere();
-  wi = sp.x * u + sp.y * v + sp.z * w;
+  // Point3D sp = sampler_ptr->sample_hemisphere();
+  // wi = sp.x * u + sp.y * v + sp.z * w;
 
-  if (sinfo.normal * wi < 0.0) {
-    wi = -sp.x * u - sp.y * v + sp.z * w;
-  }
+  // if (sinfo.normal * wi < 0.0) {
+  //   wi = -sp.x * u - sp.y * v + sp.z * w;
+  // }
 
-  float phong_lobe = pow(r * wi, exp);
-  pdf = phong_lobe * (sinfo.normal * wi);
-  return ks * cs * phong_lobe;
+  // float phong_lobe = pow(r * wi, exp);
+  // pdf = phong_lobe * (sinfo.normal * wi);
+  // return ks * cs * phong_lobe;
+  return black;
 }
 
 // Rho function.
@@ -70,11 +71,11 @@ void GlossySpecular::set_cs(const float c) {
 void GlossySpecular::set_sampler(Sampler *sp, const float exp) {
   this->sampler_ptr = sp;
   // FIXME: What is this???
-  this->sampler_ptr->map_samples_to_hemisphere(exp);
+  // this->sampler_ptr->map_samples_to_hemisphere(exp);
 }
 
 void GlossySpecular::set_samples(const int num_samples, const float exp) {
   // FIXME: What is this???
-  this->sampler_ptr = new MultiJittered(num_samples);
-  this->sampler_ptr->map_samples_to_hemisphere(exp);
+  // this->sampler_ptr = new MultiJittered(num_samples);
+  // this->sampler_ptr->map_samples_to_hemisphere(exp);
 }
