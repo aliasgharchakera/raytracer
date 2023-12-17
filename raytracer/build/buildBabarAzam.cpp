@@ -63,13 +63,13 @@ World::build(void) {
   sphere_phong_ptr->set_exp(10);
 
   // light
-  Point* light_ptr = new Point(Point3D(-10, 10, 10));
+  Point* light_ptr = new Point(Point3D(0, 0, 15));
   add_light(light_ptr);
 
-  Point* light_ptr2 = new Point(Point3D(-10, 10, -10));
-  add_light(light_ptr2);
+  // Point* light_ptr2 = new Point(Point3D(-10, 10, -10));
+  // add_light(light_ptr2);
 
-  add_object("3dmodels/babar_azam.obj", sphere_phong_ptr);
+  add_object("cube.obj", new Cosine(red));
 
   printf("My Hello World!\n");
 }
