@@ -1,8 +1,11 @@
 #pragma once
 
+#include <iostream>
+
 #include "Material.hpp"
 #include "../BRDF/Lambertian.hpp"
 #include "../world/World.hpp"
+#include "../utilities/Constants.hpp"
 
 class Matte: public Material {	
 	public:
@@ -33,6 +36,8 @@ class Matte: public Material {
 		
 	private:
 		
-		Lambertian*		ambient_brdf;
-		Lambertian*		diffuse_brdf;
+		float kd;
+		RGBColor cd;
+    Lambertian* ambient_brdf;
+    Lambertian* diffuse_brdf;
 };

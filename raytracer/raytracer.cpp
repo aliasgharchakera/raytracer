@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
         if (sinfo.hit) {
           pixel_color += weight * sinfo.material_ptr->shade(sinfo);
         }
-	else {
+  	    else {
           pixel_color += weight * world.bg_color;
         }
       }

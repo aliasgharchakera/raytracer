@@ -24,6 +24,7 @@ Vector3D Point::get_direction(const ShadeInfo &sinfo) const {
 
 // Returns the radiance along the direction from the hit point to the light source.
 RGBColor Point::L(const ShadeInfo &sinfo) const {
+  // std::cout << "Point::L" << std::endl;
   return color * ls;
 }
 

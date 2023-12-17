@@ -53,13 +53,18 @@ void Phong::set_exp(float e) {
    cos^n \alpha = dot product of reflection vector and -ray.dir.
 */
 RGBColor Phong::shade(const ShadeInfo &sinfo) const {
-  // color * (ka + kd * cos \theta + ks * cos^n \alpha).
-  // cos \theta: dot product of normal and -ray.dir.
-  // cos^n \alpha = dot product of reflection vector and -ray.dir.
-  Vector3D r = -sinfo.ray.d + 2 * (sinfo.normal * sinfo.ray.d) * sinfo.normal;
-  float cos_alpha = r * -sinfo.ray.d;
-
-  return color * (ka + kd * (sinfo.normal * -sinfo.ray.d) + ks * pow(cos_alpha, exp));
+  Vector3D wo = -sinfo.ray.d;
+  RGBColor L = ambient_brdf->rho(sinfo, wo);
+  // RGBColor L = ambient_brdf->rho(sinfo, wo) * sinfo.w->ambient_ptr->L(sinfo);
+  int num_lights = sinfo.w->lights.size();
+  for (int j = 0; j < num_lights; j++) {
+    Vector3D wi = sinfo.w->lights[j]->get_direction(sinfo);
+    float ndotwi = sinfo.normal * wi;
+    if (ndotwi > 0.0) {
+      // L += ( diffuse_brdf->f(sinfo, wo, wi) + specular_brdf->f(sinfo, wo, wi)) * sinfo.w->lights[j]->L(sinfo) * ndotwi;
+    }
+  }
+  return (red);
 }
 
 // Get normal.

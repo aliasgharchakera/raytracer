@@ -15,6 +15,7 @@
 
 #include "../materials/Cosine.hpp"
 #include "../materials/Matte.hpp"
+#include "../materials/Phong.hpp"
 
 #include "../samplers/Simple.hpp"
 #include "../samplers/Regular.hpp"
@@ -48,12 +49,20 @@ World::build(void) {
   Matte* sphere_matte_ptr = new Matte();
   sphere_matte_ptr->set_ka(0.25);
   sphere_matte_ptr->set_kd(0.65);
-  sphere_matte_ptr->set_cd(1, 1, 0);
+  sphere_matte_ptr->set_cd(1, 0, 0);
+  // sphere_matte_ptr->set_cd(1, 1, 0);
   // sphere_matte_ptr->set_ka(0.1);
   // sphere_matte_ptr->set_kd(0.1);
 
+  //phong sphere
+  Phong* sphere_phong_ptr = new Phong();
+  sphere_phong_ptr->set_ka(0.25);
+  sphere_phong_ptr->set_kd(0.65);
+  sphere_phong_ptr->set_ks(0.25);
+  sphere_phong_ptr->set_exp(100);
+
   Sphere* sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5); 
-  sphere_ptr->set_material(new Cosine(red));
+  sphere_ptr->set_material(sphere_matte_ptr);
   add_geometry(sphere_ptr);
   
   // triangle

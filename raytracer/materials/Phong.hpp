@@ -9,6 +9,9 @@
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../utilities/Vector3D.hpp"
+#include "../BRDF/Lambertian.hpp"
+#include "../BRDF/GlossySpecular.hpp"
+#include "../world/World.hpp"
 
 class Phong : public Material {
 protected:
@@ -17,6 +20,9 @@ protected:
   float kd;       // diffuse coefficient.
   float ks;       // specular coefficient.
   float exp;      // specular exponent.
+  Lambertian* ambient_brdf;
+  Lambertian* diffuse_brdf;
+  GlossySpecular* specular_brdf;
 
 public:
   // Constructors.
