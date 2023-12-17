@@ -21,27 +21,20 @@ ShadeInfo KDTree::hit_objects(const Ray& ray) {
   KDNode* current = frontier.top();
 
   while (!frontier.empty()) {
-    if (current->left == NULL || current->right == NULL) {
-      // leaf node, this is where we intersect with geometry
-      for (Geometry* geom : current->primitives) {
-        if (geom->hit(ray, t, sinfocur) && sinfocur.t < sinfomin.t) {
-          sinfomin = sinfocur;
-        }
-      }
-    } else {
-      if (current->left->bb.hit(ray)) {
-        // if the ray hits the left bounding box, look at that child later
-        frontier.push(current->left);
-      }
+    current = frontier.top();
+    frontier.pop();
 
-      if (current->right->bb.hit(ray)) {
-        // if the ray hits the right bounding box, look at that child later
+    if (current->bb.hit(ray)) {
+      if (current->left == nullptr && current->right == nullptr) {
+        for (auto g : current->primitives) {
+          if (g->hit(ray, t, sinfocur) && (t < sinfomin.t)) {
+            sinfomin = sinfocur;
+          }
+        }
+      } else {
+        frontier.push(current->left);
         frontier.push(current->right);
       }
     }
-    // move on to next item
-    current = frontier.top();
-    frontier.pop();
   }
-  return sinfomin;
 }
