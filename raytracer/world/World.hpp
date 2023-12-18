@@ -27,6 +27,7 @@
 #include "../samplers/Sampler.hpp"
 #include "../materials/Material.hpp"
 #include "../lights/Light.hpp"
+#include "../lights/Ambient.hpp"
 
 #include "ViewPlane.hpp"
 

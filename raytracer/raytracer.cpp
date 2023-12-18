@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h>
 
 #include "materials/Cosine.hpp"
 
@@ -16,13 +17,21 @@
 
 int main(int argc, char **argv) {
   World world;
+  clock_t start = clock();
+
   world.build();
+
 
   Sampler *sampler = world.sampler_ptr;
   ViewPlane &viewplane = world.vplane;
   Image image(viewplane);
   world.set_acceleration(new BVH(&world));
 
+  clock_t end = clock();
+  double elapsed = double(end - start)/CLOCKS_PER_SEC;
+  std::cout << "Overhead time: " << elapsed << " seconds.\n";
+  
+  start = clock();
   std::vector<Ray> rays;
   for (int x = 0; x < viewplane.hres; x++) {   // across.
     for (int y = 0; y < viewplane.vres; y++) { // down.
@@ -45,6 +54,10 @@ int main(int argc, char **argv) {
       // std::cout << pixel_color << "\n";
     }
   }
+  end = clock();
+  elapsed = double(end - start)/CLOCKS_PER_SEC;
+  std::cout << "Raytracing time: " << elapsed << " seconds.\n";
+
   // Write image to file.
   image.write_ppm("scene.ppm");
 

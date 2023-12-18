@@ -1,7 +1,7 @@
 #include "World.hpp"
 
 // Constructors.
-World::World() : vplane(ViewPlane()), bg_color(RGBColor()), geometry(), camera_ptr(NULL), sampler_ptr(NULL) {}
+World::World() : vplane(ViewPlane()), bg_color(RGBColor()), geometry(), camera_ptr(NULL), sampler_ptr(NULL), ambient_ptr(new Ambient(white, 0.25)), acceleration_ptr(NULL) {}
 
 // Destructor.
 World::~World() {
@@ -64,7 +64,6 @@ ShadeInfo World::hit_objects(const Ray &ray) {
 
   if (acceleration_ptr != NULL)
     return acceleration_ptr->hit(ray);
-  std::cout << "No acceleration structure found\n";
   ShadeInfo sinfo(*this), sinfo_min(*this);
   float t;
   float tmin = std::numeric_limits<float>::max();
@@ -143,5 +142,4 @@ void World::add_object(const char *path, Material *mPtr){
         //                      normals[normal_indices[i + 2] - 1]);
         add_geometry(triangle);
     }
-    std::cout << "Primitive count: " << vertex_indices.size() << std::endl;
 }
