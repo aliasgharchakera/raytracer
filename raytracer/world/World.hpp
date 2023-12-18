@@ -29,6 +29,8 @@
 #include "../lights/Light.hpp"
 #include "../happly/happly.h"
 #include "../lights/Ambient.hpp"
+#include "../tracer/Tracer.hpp"
+#include "../tracer/Basic.hpp"
 
 #include "ViewPlane.hpp"
 
@@ -48,6 +50,7 @@ public:
   Sampler *sampler_ptr;
   Light* ambient_ptr;
   Acceleration* acceleration_ptr;
+  Tracer* tracer_ptr;
 
 public:
   // Constructors.
@@ -61,6 +64,7 @@ public:
   void add_light(Light *light_ptr);
   void set_camera(Camera *c_ptr);
   void set_acceleration(Acceleration* acceleration_ptr);
+  void set_tracer(Tracer* tracer_ptr);
 
   // Checks if the given ray is shadowed by any geometry in the scene.
   virtual bool is_shadowed(const Ray &ray, const ShadeInfo &sinfo) const;

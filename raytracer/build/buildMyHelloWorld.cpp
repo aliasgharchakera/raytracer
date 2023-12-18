@@ -28,6 +28,10 @@
 
 #include "../world/World.hpp"
 
+#include "../acceleration/BVH.hpp"
+
+#include "../tracer/Basic.hpp"
+
 void
 World::build(void) {
   // View plane  .
@@ -92,6 +96,10 @@ World::build(void) {
   ambient_ptr = new Ambient(white, 0.25);
 
   // add_object("monke.obj",sphere_phong_ptr);
+  set_acceleration(new BVH(this));
 
-  printf("My Hello World!\n");
+  // set_tracer
+  // set_tracer(new Basic(this));
+
+  printf("Build My Hello World!\n");
 }
