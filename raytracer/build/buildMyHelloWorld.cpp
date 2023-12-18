@@ -66,7 +66,7 @@ World::build(void) {
   sphere_phong_ptr->set_ka(0.25);
   sphere_phong_ptr->set_kd(0.75);
   sphere_phong_ptr->set_ks(0.9);
-  sphere_phong_ptr->set_exp(10);
+  sphere_phong_ptr->set_exp(100);
 
   Sphere* sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5); 
   // sphere_ptr->set_material(sphere_matte_ptr);
@@ -90,7 +90,7 @@ World::build(void) {
   Point* light_ptr = new Point(Point3D(-10, 10, 10));
   add_light(light_ptr);
 
-  Point* light_ptr2 = new Point(Point3D(-10, 10, -10));
+  Point* light_ptr2 = new Point(Point3D(10, 10, 10));
   add_light(light_ptr2);
 
   // Ambient light.
