@@ -28,6 +28,7 @@ public:
   int depth;              // recursion depth.
   float t;                // ray parameter at hit point.
   const World *w;         // pointer to the world.
+  bool enable_shadows;    // enable shadows?
 
 public:
   // Constructor.

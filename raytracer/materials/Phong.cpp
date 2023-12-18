@@ -114,23 +114,26 @@ RGBColor Phong::shade(const ShadeInfo &sinfo) const {
   int num_lights = sinfo.w->lights.size();
 
   // Loop through lights.
-  for (int i = 0; i < num_lights; i++) {
-    // Get light direction.
-    Vector3D light_dir = sinfo.w->lights[i]->get_direction(sinfo);
+  // Checking if enable_shadow is true.
+  if (sinfo.enable_shadows){
+    for (int i = 0; i < num_lights; i++) {
+      // Get light direction.
+      Vector3D light_dir = sinfo.w->lights[i]->get_direction(sinfo);
 
-    // Get dot product of light direction and normal.
-    float dot = light_dir * normal;
+      // Get dot product of light direction and normal.
+      float dot = light_dir * normal;
 
-    // If dot product is positive, add diffuse and specular.
-    if (dot > 0) {
-      // Add diffuse.
-      diffuse += kd * diffuse_color * sinfo.w->lights[i]->get_color() * dot;
+      // If dot product is positive, add diffuse and specular.
+      if (dot > 0) {
+        // Add diffuse.
+        diffuse += kd * diffuse_color * sinfo.w->lights[i]->get_color() * dot;
 
-      // Add specular.
-      Vector3D reflect = -light_dir + 2 * dot * normal;
-      float spec_dot = reflect * view;
-      if (spec_dot > 0) {
-        specular += ks * specular_color * sinfo.w->lights[i]->get_color() * pow(spec_dot, exp);
+        // Add specular.
+        Vector3D reflect = -light_dir + 2 * dot * normal;
+        float spec_dot = reflect * view;
+        if (spec_dot > 0) {
+          specular += ks * specular_color * sinfo.w->lights[i]->get_color() * pow(spec_dot, exp);
+        }
       }
     }
   }

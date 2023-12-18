@@ -18,6 +18,11 @@
 
 #include "../world/World.hpp"
 
+#include "../acceleration/BVH.hpp"
+
+#include "../tracer/Basic.hpp"
+#include "../tracer/Shadow.hpp"
+
 void World::build(void) {
     // view plane
     vplane.top_left = Point3D(-20, 20, 20);
@@ -150,4 +155,10 @@ void World::build(void) {
 	// light_ptr3->set_position(-20, 18, 10);
 	// light_ptr3->scale_radiance(20.0);
 	add_light(light_ptr3);
+
+	// acceleration
+	set_acceleration(new BVH(this));
+
+	// set_tracer
+	set_tracer(new Shadow(this));
 }

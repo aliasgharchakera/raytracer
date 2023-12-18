@@ -65,14 +65,17 @@ void Matte::set_ka(float k) {
 
 RGBColor Matte::shade(const ShadeInfo &sinfo) const {
   RGBColor shade = ambient_color * ka;
-  for (const auto& light : sinfo.w->lights) {
-    Vector3D lightDir = light->get_direction(sinfo);
-    Ray shadowRay(sinfo.hit_point, lightDir);
+  // Check if enable_shadows is true
+  if (sinfo.enable_shadows){
+    for (const auto& light : sinfo.w->lights) {
+      Vector3D lightDir = light->get_direction(sinfo);
+      Ray shadowRay(sinfo.hit_point, lightDir);
 
-    if (sinfo.w->is_shadowed(shadowRay, sinfo)) {
-      shade *= 0.75; // Apply shadow factor
-    } else {
-      shade += diffuse_color * kd * (lightDir * sinfo.normal);
+      if (sinfo.w->is_shadowed(shadowRay, sinfo)) {
+        shade *= 0.75; // Apply shadow factor
+      } else {
+        shade += diffuse_color * kd * (lightDir * sinfo.normal);
+      }
     }
   }
 
