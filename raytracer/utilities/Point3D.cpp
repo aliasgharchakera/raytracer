@@ -42,6 +42,14 @@ float Point3D::d_squared(const Point3D &p) const {
 
 float Point3D::distance(const Point3D &p) const { return sqrt(d_squared(p)); }
 
+Point3D Point3D::interpolate(const Point3D& a, const Point3D& b,
+                             const Point3D& c, const Point3D& x,
+                             const Point3D& y) {
+  return Point3D(x.x + (c.x - a.x) / (b.x - a.x) * (y.x - x.x),
+                 x.y + (c.y - a.y) / (b.y - a.y) * (y.y - x.y),
+                 x.z + (c.z - a.z) / (b.z - a.z) * (y.z - x.z));
+}
+
 // Scale pt by a factor, s.
 Point3D operator*(const float a, const Point3D &pt) { return Point3D(a * pt.x, a * pt.y, a * pt.z); }
 
