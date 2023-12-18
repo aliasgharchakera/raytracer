@@ -47,10 +47,10 @@ void World::build(void)
   set_camera(new Perspective(0, 0, 40));
   sampler_ptr = new Jittered(camera_ptr, &vplane, 5);
 
-  Grid *grid_ptr = new Grid;
+  // Grid *grid_ptr = new Grid;
 
   // set number of primitives here
-  int n = 100000;
+  int n = 1000;
   int upper = 20;
   int lower = -20;
 
@@ -71,10 +71,11 @@ void World::build(void)
                                     radius);
 
     sphere_ptr->set_material(new Cosine(RGBColor(a, b, c)));
-    grid_ptr->add_object(sphere_ptr);
+    // grid_ptr->add_object(sphere_ptr);
+    add_geometry(sphere_ptr);
   }
 
-  grid_ptr->setup_cells();
+  // grid_ptr->setup_cells();
 
-  add_geometry(grid_ptr);
+  // add_geometry(grid_ptr);
 }

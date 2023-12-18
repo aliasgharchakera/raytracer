@@ -126,7 +126,7 @@ void World::build(void) {
 	grid_ptr->add_object(sphere_ptr4);
 
 	//Mesh models
-  add_mesh("3dmodels/babar_azam.ply", matte_ptr, Point3D(-25, -25, -10), Point3D(-15, -10, 10), grid_ptr);
+  // add_mesh("3dmodels/babar_azam.ply", matte_ptr, Point3D(-25, -25, -10), Point3D(-15, -10, 10), grid_ptr);
 
   // add_object("monke.obj", matte_ptr);
 
@@ -150,6 +150,8 @@ void World::build(void) {
 	// light_ptr3->set_position(-20, 18, 10);
 	// light_ptr3->scale_radiance(20.0);
 	add_light(light_ptr3);
+
+	add_object("3dmodels/babar_azam.obj", phong_ptr1, grid_ptr);
 
 	grid_ptr->setup_cells();
 

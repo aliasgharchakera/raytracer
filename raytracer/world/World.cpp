@@ -86,7 +86,7 @@ ShadeInfo World::hit_objects(const Ray &ray) {
 }
 
 // add an object file
-void World::add_object(const char *path, Material *mPtr){
+void World::add_object(const char *path, Material *mPtr, Grid* grid_ptr){
   std::vector<int> vertex_indices, normal_indices;
   std::vector<Point3D> vertices;
   std::vector<Vector3D> normals;
@@ -146,7 +146,7 @@ void World::add_object(const char *path, Material *mPtr){
         // triangle->set_normal(normals[normal_indices[i] - 1],
         //                      normals[normal_indices[i + 1] - 1],
         //                      normals[normal_indices[i + 2] - 1]);
-        add_geometry(triangle);
+        grid_ptr->add_object(triangle);
     }
 }
 
@@ -159,11 +159,6 @@ void World::add_mesh(std::string filename, Material* material_ptr, Point3D botto
 
     Point3D modelMin(vertices[0][0], vertices[0][1], vertices[0][2]);
     Point3D modelMax(vertices[0][0], vertices[0][1], vertices[0][2]);
-    /*std::cout << "vertices stores " << int(vertices.size()) << " numbers.\n";
-    std::cout << "vertices " << vPos[1][0] << " numbers.\n";
-    std::cout << "fInd stores " << int(fInd.size()) << " numbers.\n";
-    std::cout << "vertices " << int(fInd[0].size()) << " numbers.\n";
-    std::cout << modelMin.to_string()<<endl;*/
 
     for (const auto& i : vertices) {
         //std::cout << "vertices " << int(point[0])<<int(point[1])<<int(point[2]) << " numbers.\n";

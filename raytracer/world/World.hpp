@@ -79,6 +79,6 @@ public:
   ShadeInfo hit_objects(const Ray &ray);
 
   // add object
-  void add_object(const char *path, Material *mPtr);
+  void add_object(const char *path, Material *mPtr, Grid *grid_ptr);
   void add_mesh(std::string filename, Material* material_ptr, Point3D bottom, Point3D top, Grid *grid_ptr);
 };
