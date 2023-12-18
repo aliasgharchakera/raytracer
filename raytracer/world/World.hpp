@@ -27,6 +27,7 @@
 #include "../samplers/Sampler.hpp"
 #include "../materials/Material.hpp"
 #include "../lights/Light.hpp"
+#include "../happly/happly.h"
 
 #include "ViewPlane.hpp"
 
@@ -73,4 +74,5 @@ public:
 
   // add object
   void add_object(const char *path, Material *mPtr);
+  void add_mesh(std::string filename, Material* material_ptr, Point3D bottom, Point3D top);
 };

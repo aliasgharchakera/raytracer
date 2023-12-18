@@ -1,4 +1,5 @@
 #include "World.hpp"
+#include <array>
 
 // Constructors.
 World::World() : vplane(ViewPlane()), bg_color(RGBColor()), geometry(), camera_ptr(NULL), sampler_ptr(NULL) {}
@@ -62,9 +63,9 @@ bool World::is_shadowed(const Ray &ray, const ShadeInfo &sinfo) const {
 // the ray with the scene geometry.
 ShadeInfo World::hit_objects(const Ray &ray) {
 
-  // if (acceleration_ptr != NULL)
-  //   return acceleration_ptr->hit_objects(ray);
-  // std::cout << "No acceleration structure found\n";
+  if (acceleration_ptr != NULL)
+    return acceleration_ptr->hit(ray);
+  std::cout << "No acceleration structure found\n";
   ShadeInfo sinfo(*this), sinfo_min(*this);
   float t;
   float tmin = std::numeric_limits<float>::max();
@@ -144,3 +145,42 @@ void World::add_object(const char *path, Material *mPtr){
         add_geometry(triangle);
     }
 }
+
+void World::add_mesh(std::string filename, Material* material_ptr, Point3D bottom, Point3D top) {
+
+    happly::PLYData plyIn(filename);
+    std::vector<std::array<double, 3>> vertices = plyIn.getVertexPositions();
+    std::vector<std::vector<size_t>> faces = plyIn.getFaceIndices<size_t>();
+    std::vector<Point3D> points;
+
+    Point3D modelMin(vertices[0][0], vertices[0][1], vertices[0][2]);
+    Point3D modelMax(vertices[0][0], vertices[0][1], vertices[0][2]);
+    /*std::cout << "vertices stores " << int(vertices.size()) << " numbers.\n";
+    std::cout << "vertices " << vPos[1][0] << " numbers.\n";
+    std::cout << "fInd stores " << int(fInd.size()) << " numbers.\n";
+    std::cout << "vertices " << int(fInd[0].size()) << " numbers.\n";
+    std::cout << modelMin.to_string()<<endl;*/
+
+    for (const auto& i : vertices) {
+        //std::cout << "vertices " << int(point[0])<<int(point[1])<<int(point[2]) << " numbers.\n";
+        Point3D obj(i[0], i[1], i[2]);
+        points.push_back(obj);
+        modelMin = min(modelMin, obj);
+        modelMax = max(modelMax, obj);
+    }
+
+    for (auto& p: points) {
+        p = Point3D::interpolate(modelMin, modelMax, p, bottom, top);
+    }
+
+    for (const auto& f : faces) {
+      //std::cout << points[f[0]].to_string() << std::endl;
+
+      Triangle* mesh_triangle = new Triangle(points[f[0]], points[f[1]], points[f[2]]);
+      mesh_triangle->set_material(material_ptr);
+      add_geometry(mesh_triangle);
+    }
+    //delete material_ptr;
+
+}
+
