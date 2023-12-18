@@ -21,6 +21,10 @@ int main(int argc, char **argv) {
 
   world.build();
 
+  if (world.acceleration_ptr)
+    std::cout << "Using acceleration structure.\n";
+  else
+    std::cout << "Without using acceleration structure.\n";
 
   Sampler *sampler = world.sampler_ptr;
   ViewPlane &viewplane = world.vplane;
