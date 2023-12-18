@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Light.hpp"
 
 class Ambient : public Light {
