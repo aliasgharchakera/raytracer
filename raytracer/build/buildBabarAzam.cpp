@@ -35,10 +35,10 @@ World::build(void) {
   // View plane  .
   vplane.top_left.x = -1;
   vplane.top_left.y = 2;
-  vplane.top_left.z = 2;
+  vplane.top_left.z = 1;
   vplane.bottom_right.x = 1;
-  vplane.bottom_right.y = -2;
-  vplane.bottom_right.z = 2;
+  vplane.bottom_right.y = 0;
+  vplane.bottom_right.z = 1;
   vplane.hres = 400;
   vplane.vres = 400;
 
@@ -47,36 +47,51 @@ World::build(void) {
   
   // Camera and sampler.
   set_camera(new Perspective(0, 0, 10));
-  sampler_ptr = new Jittered(camera_ptr, &vplane, 5);
+  sampler_ptr = new Simple(camera_ptr, &vplane);
 	
   // sphere
-  Matte* sphere_matte_ptr = new Matte(red);
-  sphere_matte_ptr->set_ka(0.25);
-  sphere_matte_ptr->set_kd(0.65);
-  // sphere_matte_ptr->set_cd(1, 0, 0);
-  // sphere_matte_ptr->set_cd(1, 1, 0);
-  // sphere_matte_ptr->set_ka(0.1);
-  // sphere_matte_ptr->set_kd(0.1);
+  Phong* sphere_phong_ptr = new Phong((RGBColor(0.8, 0.7, 0.2)));
+  sphere_phong_ptr->set_ka(0.25);
+  sphere_phong_ptr->set_kd(0.65);
+  sphere_phong_ptr->set_ks(0.9);
+  sphere_phong_ptr->set_exp(100);
+
+  Sphere* sphere_ptr = new Sphere(Point3D(-1, 2, -4), 0.5); 
+  sphere_ptr->set_material(sphere_phong_ptr);
+  add_geometry(sphere_ptr);
+
+  Phong* sphere_phong_ptr2 = new Phong((RGBColor(0, 2, 0)));
+  sphere_phong_ptr2->set_ka(0.25);
+  sphere_phong_ptr2->set_kd(0.65);
+  sphere_phong_ptr2->set_ks(0.9);
+  sphere_phong_ptr2->set_exp(100);
+
+  Sphere* sphere_ptr2 = new Sphere(Point3D(1, 2, -4), 0.5);
+  sphere_ptr2->set_material(sphere_phong_ptr2);
+  add_geometry(sphere_ptr2);
 
   // phong sphere
-  Phong* sphere_phong_ptr = new Phong(red);
-  sphere_phong_ptr->set_ka(0.25);
-  sphere_phong_ptr->set_kd(0.75);
-  sphere_phong_ptr->set_ks(0.9);
-  sphere_phong_ptr->set_exp(10);
+  Phong* babar_phong_ptr = new Phong(red);
+  babar_phong_ptr->set_ka(0.25);
+  babar_phong_ptr->set_kd(0.75);
+  babar_phong_ptr->set_ks(0.9);
+  babar_phong_ptr->set_exp(10);
 
   // light
-  Point* light_ptr = new Point(Point3D(0, 0, 15));
-  add_light(light_ptr);
+  // Point* light_ptr = new Point(Point3D(0, 0, 15));
+  // add_light(light_ptr);
 
-  // Point* light_ptr2 = new Point(Point3D(-10, 10, -10));
-  // add_light(light_ptr2);
+  Point* light_ptr2 = new Point(Point3D(-10, 10, 10));
+  add_light(light_ptr2);
+
+  Point* light_ptr3 = new Point(Point3D(200, 10, 10));
+  add_light(light_ptr3);
 
   Grid* grid_ptr = new Grid;
 
-	// add_mesh("3dmodels/finalskull.ply", sphere_phong_ptr, Point3D(-80.0, -60, -10), Point3D(-45, 0, 5), grid_ptr);
+	// add_mesh("3dmodels/finalskull.ply", babar_phong_ptr, Point3D(-80.0, -60, -10), Point3D(-45, 0, 5), grid_ptr);
 
-  add_object("3dmodels/babar_azam.obj", sphere_phong_ptr, grid_ptr);
+  add_object("3dmodels/dragon_stand/dragonStandRight_0.ply", babar_phong_ptr, grid_ptr);
   grid_ptr->setup_cells();
   add_geometry(grid_ptr);
 
