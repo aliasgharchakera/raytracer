@@ -71,5 +71,5 @@ World::build(void) {
 
   add_object("3dmodels/babar_azam.obj", sphere_phong_ptr);
 
-  printf("My Hello World!\n");
+  printf("Build 3d Models!\n");
 }

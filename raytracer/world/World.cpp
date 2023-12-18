@@ -1,7 +1,7 @@
 #include "World.hpp"
 
 // Constructors.
-World::World() : vplane(ViewPlane()), bg_color(RGBColor()), geometry(), camera_ptr(NULL), sampler_ptr(NULL), ambient_ptr(new Ambient(white, 0.25)), acceleration_ptr(NULL) {}
+World::World() : vplane(ViewPlane()), bg_color(RGBColor()), geometry(), camera_ptr(NULL), sampler_ptr(NULL), ambient_ptr(new Ambient(white, 0.25)), acceleration_ptr(NULL), tracer_ptr(new Basic(this)) {}
 
 // Destructor.
 World::~World() {
@@ -42,6 +42,11 @@ void World::set_camera(Camera *c_ptr) {
 // set acceleration structure
 void World::set_acceleration(Acceleration* acceleration_ptr){
   this->acceleration_ptr = acceleration_ptr;
+}
+
+// set tracer
+void World::set_tracer(Tracer* tracer_ptr){
+  this->tracer_ptr = tracer_ptr;
 }
 
 // Checks if the given ray is shadowed by any geometry in the scene.

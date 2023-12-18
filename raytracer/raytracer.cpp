@@ -25,7 +25,6 @@ int main(int argc, char **argv) {
   Sampler *sampler = world.sampler_ptr;
   ViewPlane &viewplane = world.vplane;
   Image image(viewplane);
-  world.set_acceleration(new BVH(&world));
 
   clock_t end = clock();
   double elapsed = double(end - start)/CLOCKS_PER_SEC;
@@ -42,12 +41,13 @@ int main(int argc, char **argv) {
       for (const auto &ray : rays) {
         float weight = ray.w; // ray weight for the pixel.
         ShadeInfo sinfo = world.hit_objects(ray);
-        if (sinfo.hit) {
-          pixel_color += weight * sinfo.material_ptr->shade(sinfo);
-        }
-  	    else {
-          pixel_color += weight * world.bg_color;
-        }
+        // if (sinfo.hit) {
+        //   pixel_color += weight * sinfo.material_ptr->shade(sinfo);
+        // }
+  	    // else {
+        //   pixel_color += weight * world.bg_color;
+        // }
+        pixel_color += world.tracer_ptr->trace_ray(ray, 0);
       }
       // Save color to image.
       image.set_pixel(x, y, pixel_color);
