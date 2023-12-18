@@ -55,4 +55,7 @@ public:
 
   // Get bounding box.
   virtual BBox getBBox() const = 0;
+
+  // Get center
+  virtual Point3D getCenter() const = 0;
 };

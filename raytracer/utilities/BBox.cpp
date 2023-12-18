@@ -2,23 +2,23 @@
 
 // FIXME: Implement this class.
 // Constructors.
-BBox::BBox() : pmin(Point3D()), pmax(Point3D()) {}
+// BBox::BBox() : pmin(Point3D()), pmax(Point3D()) {}
 
-BBox::BBox(const Point3D& min, const Point3D& max) : pmin(min), pmax(max) {}
+BBox::BBox(const Point3D& min, const Point3D& max) : pmin(min), pmax(max), delta(pmax-pmin) {}
 
 // Copy constructor and assignment operator.
-BBox::BBox(const BBox &b) : pmin(b.pmin), pmax(b.pmax) {}
+// BBox::BBox(const BBox &b) : pmin(b.pmin), pmax(b.pmax) {}
 
-BBox &BBox::operator=(const BBox &rhs) {
-  if (this == &rhs) {
-    return *this;
-  }
+// BBox &BBox::operator=(const BBox &rhs) {
+//   if (this == &rhs) {
+//     return *this;
+//   }
 
-  pmin = rhs.pmin;
-  pmax = rhs.pmax;
+//   pmin = rhs.pmin;
+//   pmax = rhs.pmax;
 
-  return *this;
-}
+//   return *this;
+// }
 
 // String representation.
 std::string BBox::to_string() const {
@@ -96,6 +96,13 @@ void BBox::extend(const BBox& b) {
   pmax.z = std::max(pmax.z, b.pmax.z);
 }
 
+// Extend this bbox, if necessary, to include p.
+void BBox::extend(const Point3D& p) {
+    this->pmin = min(pmin, p);
+    this->pmax = max(pmax, p);
+    delta = pmax - pmin;
+}
+
 // Does this BBox contain p? True even when p lies on a boundary.
 bool BBox::contains(const Point3D& p) {
   return (p.x >= pmin.x && p.x <= pmax.x &&
@@ -113,4 +120,15 @@ bool BBox::overlaps(const BBox& b) {
   return (pmax.x >= b.pmin.x && pmin.x <= b.pmax.x &&
           pmax.y >= b.pmin.y && pmin.y <= b.pmax.y &&
           pmax.z >= b.pmin.z && pmin.z <= b.pmax.z);
+}
+
+// max dimension
+int BBox::maxDimension() const {
+  if (delta.x > delta.y && delta.x > delta.z) {
+    return 0;
+  } else if (delta.y > delta.z) {
+    return 1;
+  } else {
+    return 2;
+  }
 }

@@ -12,7 +12,7 @@
 #include "world/World.hpp"
 #include "world/ViewPlane.hpp"
 
-#include "acceleration/KDTree.hpp"
+#include "acceleration/BVH.hpp"
 
 int main(int argc, char **argv) {
   World world;
@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
   Sampler *sampler = world.sampler_ptr;
   ViewPlane &viewplane = world.vplane;
   Image image(viewplane);
-  // world.set_acceleration(new KDTree(&world));
+  world.set_acceleration(new BVH(&world));
 
   std::vector<Ray> rays;
   for (int x = 0; x < viewplane.hres; x++) {   // across.

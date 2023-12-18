@@ -116,3 +116,9 @@ bool Triangle::shadow_hit(const Ray &ray, float &tmin) const {
 BBox Triangle::getBBox() const {
   return BBox(min(min(v0, v1), v2), max(max(v0, v1), v2));
 }
+
+// Get center
+Point3D Triangle::getCenter() const {
+	Point3D centroid((v0.x + v1.x + v2.x)/3, (v0.y + v1.y + v2.y)/3, (v0.z + v1.z + v2.z)/3);
+  return centroid;
+}

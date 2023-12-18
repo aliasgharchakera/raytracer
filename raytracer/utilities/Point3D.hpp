@@ -40,6 +40,7 @@ public:
   Point3D operator-(const Vector3D &v) const; // subtraction of a vector
   Point3D operator*(const float s) const;     // scale the point by a factor, s.
   bool operator==(const Point3D &p) const; // equality of points
+  float operator[](int idx) const;         // access co-ordinates by index.
 
   // Distance between points.
   float d_squared(const Point3D &p) const; // square of distance

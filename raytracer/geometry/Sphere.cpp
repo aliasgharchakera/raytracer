@@ -105,3 +105,8 @@ BBox Sphere::getBBox() const {
   Point3D maxPoint(c.x + r, c.y + r, c.z + r);
   return BBox(minPoint, maxPoint);
 }
+
+// Get center
+Point3D Sphere::getCenter() const {
+  return c;
+}

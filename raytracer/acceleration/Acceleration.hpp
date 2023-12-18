@@ -1,27 +1,22 @@
 #pragma once
 
-#include "../utilities/ShadeInfo.hpp"
-#include "../world/World.hpp"
+/**
+   This file declares the Acceleration class which is an abstract class for all the
+   acceleration structures used.
+*/
 
+#include <vector>
+
+class Ray;
+class ShadeInfo;
 class World;
 
 class Acceleration {
- protected:
-  World* world;
+    protected:
+        World* world_ptr;
 
- public:
-  // Constructor
-  explicit Acceleration(World* _world);
-
-  Acceleration() = default;
-
-  // Remove copy constructor
-  Acceleration(const Acceleration& rhs) = delete;
-
-  // Destructor
-  virtual ~Acceleration() = default;
-
-  // Calculates what object a Ray hits
-  virtual ShadeInfo hit_objects(const Ray& ray) = 0;
-
+    public:
+        Acceleration() = default;
+        virtual ShadeInfo hit(const Ray &ray) = 0;
+        virtual ~Acceleration() = default;
 };

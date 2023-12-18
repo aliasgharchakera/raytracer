@@ -37,4 +37,7 @@ public:
 
   // Get bounding box.
   virtual BBox getBBox() const override;
+
+  // Get center
+  virtual Point3D getCenter() const override;
 };

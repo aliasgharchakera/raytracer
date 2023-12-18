@@ -60,7 +60,13 @@ bool Plane::shadow_hit(const Ray &ray, float &tmin) const {
 
   return false;
 }
+
 // Get bounding box.
 BBox Plane::getBBox() const {
   return BBox();
+}
+
+// Get center
+Point3D Plane::getCenter() const {
+  return a;
 }
