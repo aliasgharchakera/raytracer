@@ -31,6 +31,7 @@
 #include "../acceleration/BVH.hpp"
 
 #include "../tracer/Basic.hpp"
+#include "../tracer/Shadow.hpp"
 
 void
 World::build(void) {
@@ -99,7 +100,7 @@ World::build(void) {
   set_acceleration(new BVH(this));
 
   // set_tracer
-  // set_tracer(new Basic(this));
+  set_tracer(new Shadow(this));
 
   printf("Build My Hello World!\n");
 }

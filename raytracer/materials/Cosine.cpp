@@ -24,12 +24,15 @@ Cosine &Cosine::operator=(const Cosine &other) {
 
 RGBColor Cosine::shade(const ShadeInfo &sinfo) const {
   RGBColor shade = color * (sinfo.normal * -sinfo.ray.d);
-  for (const auto& light : sinfo.w->lights) {
-    Vector3D lightDir = light->get_direction(sinfo);
-    Ray shadowRay(sinfo.hit_point, lightDir);
+  // Check if enable_shadows is true
+  if (sinfo.enable_shadows){
+    for (const auto& light : sinfo.w->lights) {
+      Vector3D lightDir = light->get_direction(sinfo);
+      Ray shadowRay(sinfo.hit_point, lightDir);
 
-    if (sinfo.w->is_shadowed(shadowRay, sinfo)) {
-      shade *= 0.75; // Apply shadow factor
+      if (sinfo.w->is_shadowed(shadowRay, sinfo)) {
+        shade *= 0.75; // Apply shadow factor
+      }
     }
   }
 
