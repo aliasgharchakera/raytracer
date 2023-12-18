@@ -2,6 +2,7 @@
 
 
 #include "../geometry/Sphere.hpp"
+#include "../geometry/Grid.hpp"
 
 #include "../samplers/Simple.hpp"
 #include "../samplers/Jittered.hpp"
@@ -24,24 +25,26 @@
 #include "../tracer/Shadow.hpp"
 
 void World::build(void) {
-    // view plane
-    vplane.top_left = Point3D(-20, 20, 20);
-    vplane.bottom_right = Point3D(20, -20, 20);
-    vplane.hres = 480;
-    vplane.vres = 480;
-    // vplane.set_maxdepth(5);
+	// view plane
+	vplane.top_left = Point3D(-20, 20, 20);
+	vplane.bottom_right = Point3D(20, -20, 20);
+	vplane.hres = 480;
+	vplane.vres = 480;
+	// vplane.set_maxdepth(5);
 
-    // Background color.
-      bg_color = black;
+	// Background color.
+	bg_color = black;
 
-    RGBColor brown(0.71, 0.40, 0.16);  // brown
-    RGBColor lightGreen(0.65, 1, 0.30);
-    RGBColor lightPurple(0.65, 0.3, 1);
+	RGBColor brown(0.71, 0.40, 0.16);  // brown
+	RGBColor lightGreen(0.65, 1, 0.30);
+	RGBColor lightPurple(0.65, 0.3, 1);
 
-    // camera and sampler.
-    set_camera(new Perspective(0, 0, 50));
-    // set_tracer(new Basic(this));
-    sampler_ptr = new Jittered(camera_ptr, &vplane,5);
+	Grid *grid_ptr = new Grid;
+
+	// camera and sampler.
+	set_camera(new Perspective(0, 0, 50));
+	// set_tracer(new Basic(this));
+	sampler_ptr = new Jittered(camera_ptr, &vplane,5);
 
 	Matte* matte_ptr = new Matte;
 	matte_ptr->set_ka(0.45);
@@ -69,7 +72,7 @@ void World::build(void) {
         float offsetY = (-30) + (rand() % static_cast<int>(35 - (-30) + 1));
         Sphere* sphere_ptr = new Sphere(Point3D(offsetX, offsetY, -0.5), 0.25);
         sphere_ptr->set_material(phong_ptr);
-        add_geometry(sphere_ptr);
+        grid_ptr->add_object(sphere_ptr);
 	}
 
   RGBColor yellow = RGBColor(0.7, 0.7, 0.08); 
@@ -84,7 +87,7 @@ void World::build(void) {
 
 	Sphere* sphere_ptr1 = new Sphere(Point3D(15.0, 18, 10.0), 4.866);
 	sphere_ptr1->set_material(phong_ptr1);
-	add_geometry(sphere_ptr1);
+	grid_ptr->add_object(sphere_ptr1);
 
 	Phong* phong_ptr2 = new Phong;
 	phong_ptr2->set_ka(ka);
@@ -96,7 +99,7 @@ void World::build(void) {
 
 	Sphere* sphere_ptr2 = new Sphere(Point3D(10, -8, -0.5), 4.2);
 	sphere_ptr2->set_material(phong_ptr2);
-	add_geometry(sphere_ptr2);
+	grid_ptr->add_object(sphere_ptr2);
 
 	Phong* phong_ptr3 = new Phong;
 	phong_ptr3->set_ka(ka);
@@ -108,7 +111,7 @@ void World::build(void) {
 
 	Sphere* sphere_ptr3 = new Sphere(Point3D(-5, 8, -0.5), 5.866);
 	sphere_ptr3->set_material(phong_ptr3);
-	add_geometry(sphere_ptr3);
+	grid_ptr->add_object(sphere_ptr3);
 
 	Phong* phong_ptr4 = new Phong;
 	phong_ptr4->set_ka(ka);
@@ -120,12 +123,12 @@ void World::build(void) {
 
 	Sphere* sphere_ptr4 = new Sphere(Point3D(-22, 22, -0.5), 4.866);
 	sphere_ptr4->set_material(phong_ptr4);
-	add_geometry(sphere_ptr4);
+	grid_ptr->add_object(sphere_ptr4);
 
 	//Mesh models
-    add_mesh("3dmodels/babar_azam.ply", matte_ptr, Point3D(-25, -25, -10), Point3D(-15, -10, 10));
+  add_mesh("3dmodels/babar_azam.ply", matte_ptr, Point3D(-25, -25, -10), Point3D(-15, -10, 10), grid_ptr);
 
-    // add_object("monke.obj", matte_ptr);
+  // add_object("monke.obj", matte_ptr);
 
     //Lighting
 	// Ambient* ambient_ptr = new Ambient(white,0.5);
@@ -148,8 +151,12 @@ void World::build(void) {
 	// light_ptr3->scale_radiance(20.0);
 	add_light(light_ptr3);
 
+	grid_ptr->setup_cells();
+
+	add_geometry(grid_ptr);
+
 	// acceleration
-	set_acceleration(new BVH(this));
+	// set_acceleration(new BVH(this));
 
 	// set_tracer
 	set_tracer(new Shadow(this));

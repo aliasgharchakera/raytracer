@@ -10,6 +10,7 @@
 #include "../world/World.hpp"
 
 #include "../acceleration/BVH.hpp"
+#include "../geometry/Grid.hpp"
 
 #include "../tracer/Basic.hpp"
 #include "../tracer/Shadow.hpp"
@@ -46,6 +47,7 @@ void World::build(void)
   set_camera(new Perspective(0, 0, 40));
   sampler_ptr = new Jittered(camera_ptr, &vplane, 5);
 
+  Grid *grid_ptr = new Grid;
 
   // set number of primitives here
   int n = 100000;
@@ -69,10 +71,10 @@ void World::build(void)
                                     radius);
 
     sphere_ptr->set_material(new Cosine(RGBColor(a, b, c)));
-    add_geometry(sphere_ptr);
+    grid_ptr->add_object(sphere_ptr);
   }
 
-  // set_acceleration(new BVH(this));
+  grid_ptr->setup_cells();
 
-  set_tracer(new Shadow(this));
+  add_geometry(grid_ptr);
 }

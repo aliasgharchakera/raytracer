@@ -88,52 +88,52 @@ ShadeInfo World::hit_objects(const Ray &ray) {
 // add an object file
 void World::add_object(const char *path, Material *mPtr){
   std::vector<int> vertex_indices, normal_indices;
-    std::vector<Point3D> vertices;
-    std::vector<Vector3D> normals;
+  std::vector<Point3D> vertices;
+  std::vector<Vector3D> normals;
 
-    FILE *file = fopen(path, "r");
+  FILE *file = fopen(path, "r");
 
-    if (file == NULL)
+  if (file == NULL)
+  {
+      std::cout << "Cannot open file " << path << "\n";
+      return;
+  }
+
+  while (1)
+  {
+    char lineHeader[128];
+    int res = fscanf(file, "%s", lineHeader);
+    if (res == EOF)
+        break;
+
+    if (strcmp(lineHeader, "v") == 0)
     {
-        std::cout << "Cannot open file " << path << "\n";
-        return;
+        Point3D vertex;
+        fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
+        vertices.push_back(vertex);
     }
-
-    while (1)
+    else if (strcmp(lineHeader, "vn") == 0)
     {
-        char lineHeader[128];
-        int res = fscanf(file, "%s", lineHeader);
-        if (res == EOF)
-            break;
-
-        if (strcmp(lineHeader, "v") == 0)
-        {
-            Point3D vertex;
-            fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
-            vertices.push_back(vertex);
-        }
-        else if (strcmp(lineHeader, "vn") == 0)
-        {
-            Vector3D normal;
-            fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
-            normals.push_back(normal);
-        }
-        else if (strcmp(lineHeader, "f") == 0)
-        {
-            std::string v1, v2, v3;
-            int vertexIndex[3], normalIndex[3];
-            fscanf(file, "%d/%*d/%d %d/%*d/%d %d/%*d/%d\n", &vertexIndex[0],
-                   &normalIndex[0], &vertexIndex[1], &normalIndex[1],
-                   &vertexIndex[2], &normalIndex[2]);
-            vertex_indices.push_back(vertexIndex[0]);
-            vertex_indices.push_back(vertexIndex[1]);
-            vertex_indices.push_back(vertexIndex[2]);
-
-            normal_indices.push_back(normalIndex[0]);
-            normal_indices.push_back(normalIndex[1]);
-            normal_indices.push_back(normalIndex[2]);
-        }
+        Vector3D normal;
+        fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
+        normals.push_back(normal);
     }
+    else if (strcmp(lineHeader, "f") == 0)
+    {
+        std::string v1, v2, v3;
+        int vertexIndex[3], normalIndex[3];
+        fscanf(file, "%d/%*d/%d %d/%*d/%d %d/%*d/%d\n", &vertexIndex[0],
+                &normalIndex[0], &vertexIndex[1], &normalIndex[1],
+                &vertexIndex[2], &normalIndex[2]);
+        vertex_indices.push_back(vertexIndex[0]);
+        vertex_indices.push_back(vertexIndex[1]);
+        vertex_indices.push_back(vertexIndex[2]);
+
+        normal_indices.push_back(normalIndex[0]);
+        normal_indices.push_back(normalIndex[1]);
+        normal_indices.push_back(normalIndex[2]);
+    }
+  }
 
     // now we have four arrays 1) Vertices 2) Normals 3) Vertex Indices 4) Normal Indices
     // to get faces we need to iterate over vertex indices and normal indices and create triangles
@@ -150,7 +150,7 @@ void World::add_object(const char *path, Material *mPtr){
     }
 }
 
-void World::add_mesh(std::string filename, Material* material_ptr, Point3D bottom, Point3D top) {
+void World::add_mesh(std::string filename, Material* material_ptr, Point3D bottom, Point3D top, Grid* grid_ptr) {
 
     happly::PLYData plyIn(filename);
     std::vector<std::array<double, 3>> vertices = plyIn.getVertexPositions();
@@ -182,7 +182,8 @@ void World::add_mesh(std::string filename, Material* material_ptr, Point3D botto
 
       Triangle* mesh_triangle = new Triangle(points[f[0]], points[f[1]], points[f[2]]);
       mesh_triangle->set_material(material_ptr);
-      add_geometry(mesh_triangle);
+      // add_geometry(mesh_triangle);
+      grid_ptr->add_object(mesh_triangle);
     }
     //delete material_ptr;
 

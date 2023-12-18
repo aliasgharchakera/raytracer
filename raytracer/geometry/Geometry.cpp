@@ -11,3 +11,8 @@ Material* Geometry::get_material() const {
 void Geometry::set_material(Material* mPtr) {
     material_ptr = mPtr;
 }
+
+// Add object
+void Geometry::add_object(Geometry* object_ptr) {
+    // Do nothing.
+}

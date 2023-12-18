@@ -104,7 +104,7 @@ void BBox::extend(const Point3D& p) {
 }
 
 // Does this BBox contain p? True even when p lies on a boundary.
-bool BBox::contains(const Point3D& p) {
+bool BBox::contains(const Point3D& p) const {
   return (p.x >= pmin.x && p.x <= pmax.x &&
           p.y >= pmin.y && p.y <= pmax.y &&
           p.z >= pmin.z && p.z <= pmax.z);

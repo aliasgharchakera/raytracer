@@ -26,7 +26,7 @@ class ShadeInfo;
 
 class Geometry {
 protected:
-  Material *material_ptr; // this object's material.
+  mutable Material *material_ptr; // this object's material.
 
 public:
   // Constructors.
@@ -58,4 +58,7 @@ public:
 
   // Get center
   virtual Point3D getCenter() const = 0;
+
+  // Add object
+  virtual void add_object(Geometry *object_ptr);
 };
