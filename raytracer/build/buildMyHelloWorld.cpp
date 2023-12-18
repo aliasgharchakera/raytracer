@@ -12,6 +12,7 @@
 #include "../geometry/Triangle.hpp"
 
 #include "../lights/Point.hpp"
+#include "../lights/Ambient.hpp"
 
 #include "../materials/Cosine.hpp"
 #include "../materials/Matte.hpp"
@@ -87,7 +88,10 @@ World::build(void) {
   Point* light_ptr2 = new Point(Point3D(-10, 10, -10));
   add_light(light_ptr2);
 
-  add_object("monke.obj",sphere_phong_ptr);
+  // Ambient light.
+  ambient_ptr = new Ambient(white, 0.25);
+
+  // add_object("monke.obj",sphere_phong_ptr);
 
   printf("My Hello World!\n");
 }
