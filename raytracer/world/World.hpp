@@ -28,6 +28,7 @@
 #include "../materials/Material.hpp"
 #include "../lights/Light.hpp"
 #include "../happly/happly.h"
+#include "../lights/Ambient.hpp"
 
 #include "ViewPlane.hpp"
 

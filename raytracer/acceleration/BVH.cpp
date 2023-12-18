@@ -25,7 +25,7 @@ void BVH::build() {
     Node node;
     std::vector<Node> nodeList;
     nodeList.reserve(((int)geom_array.size())*2);
-    std::cout << geom_array.size() << std::endl;
+    std::cout << "Geometry size: " << geom_array.size() << std::endl;
 
     while(stack_ptr > 0) {
         BvhEntry &entry(stackk[--stack_ptr]);       //Pop node from stack
