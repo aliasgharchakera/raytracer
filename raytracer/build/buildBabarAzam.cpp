@@ -47,7 +47,7 @@ World::build(void) {
   
   // Camera and sampler.
   set_camera(new Perspective(0, 0, 10));
-  sampler_ptr = new Simple(camera_ptr, &vplane);
+  sampler_ptr = new Jittered(camera_ptr, &vplane, 5);
 	
   // sphere
   Phong* sphere_phong_ptr = new Phong((RGBColor(0.8, 0.7, 0.2)));
@@ -91,7 +91,7 @@ World::build(void) {
 
 	// add_mesh("3dmodels/finalskull.ply", babar_phong_ptr, Point3D(-80.0, -60, -10), Point3D(-45, 0, 5), grid_ptr);
 
-  add_object("3dmodels/dragon_stand/dragonStandRight_0.ply", babar_phong_ptr, grid_ptr);
+  add_object("3dmodels/babar_azam.obj", babar_phong_ptr, grid_ptr);
   grid_ptr->setup_cells();
   add_geometry(grid_ptr);
 

@@ -1,0 +1,491 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+    <head>
+        <!-- meta data -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+        <!--font-family-->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+		<link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
+        
+        <!-- title of site -->
+        <title>Babar Azam Raytracer</title>
+
+        <!-- For favicon png -->
+		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
+       
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+        <!--linear icon css-->
+		<link rel="stylesheet" href="assets/css/linearicons.css">
+
+        <!--flaticon.css-->~
+		<link rel="stylesheet" href="assets/css/flaticon.css">
+
+		<!--animate.css-->
+        <link rel="stylesheet" href="assets/css/animate.css">
+
+        <!--owl.carousel.css-->
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+		<link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+		
+        <!--bootstrap.min.css-->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		
+		<!-- bootsnav -->
+		<link rel="stylesheet" href="assets/css/bootsnav.css" >	
+        
+        <!--style.css-->
+        <link rel="stylesheet" href="assets/css/style.css">
+        
+        <!--responsive.css-->
+        <link rel="stylesheet" href="assets/css/responsive.css">
+        
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		
+        <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+	
+	<body>
+		<!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+	
+		<!--welcome-hero start -->
+		<section id="home" class="welcome-hero">
+
+			<!-- top-area Start -->
+			<div class="top-area">
+				<div class="header-area">
+					<!-- Start Navigation -->
+				    <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+
+				        <div class="container">
+
+				            <!-- Start Header Navigation -->
+				            <div class="navbar-header">
+				                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+				                    <i class="fa fa-bars"></i>
+				                </button>
+				                <a class="navbar-brand" href="index.html">babar azam raytracer<span></span></a>
+
+				            </div><!--/.navbar-header-->
+				            <!-- End Header Navigation -->
+
+				            <!-- Collect the nav links, forms, and other content for toggling -->
+				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+				                    <li class=" scroll active"><a href="#home">home</a></li>
+				                    <li class="scroll"><a href="#service">scene</a></li>
+				                    <li class="scroll"><a href="#featured-cars">acceleration structure</a></li>
+				                    <li class="scroll"><a href="#new-cars">features</a></li>
+				                    <li class="scroll"><a href="#brand">code/build</a></li>
+														<li class="scroll"><a href="#renders">renders</a></li>
+				                    <li class="scroll"><a href="#contact">team</a></li>
+				                </ul><!--/.nav -->
+				            </div><!-- /.navbar-collapse -->
+				        </div><!--/.container-->
+				    </nav><!--/nav-->
+				    <!-- End Navigation -->
+				</div><!--/.header-area-->
+			    <div class="clearfix"></div>
+
+			</div><!-- /.top-area-->
+			<!-- top-area End -->
+
+			<div class="container">
+				<div class="welcome-hero-txt">
+					<h2>Insane Raytracer</h2>
+					<p>
+						Welcome to our showcase for the insane raytracer. This raytracer is a project for the course Computer Graphics - CS440 at Habib University.
+					</p>
+				</div>
+			</div>
+
+		</section><!--/.welcome-hero-->
+		<!--welcome-hero end -->
+
+		<!--service start -->
+		<!-- <section id="new-car" class="service">
+			<div class="container">
+				<div class="service-content">
+					<div class="row">
+						<div class="col-md-4 col-sm-6">
+							<div class="single-service-item">
+								<h2>Acceleration</h2>
+								<p>
+									We have implemented Grid and BVH acceleration structures to speed up the ray tracing process.  
+								</p>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="single-service-item">
+								<h2>Cameras</h2>
+								<p>
+									Our raytracer supports parallel and perspective projection of camera.
+								</p>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="single-service-item">
+								<h2>Geometry</h2>
+								<p>
+									Our Raytracer implements the three basic primitives: Sphere, Triangle and Plane
+										</p>
+								</p>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="single-service-item">
+								<h2>Lights</h2>
+								<p>
+									We have implemented point lights and spot lights on top of the basic ambient lighting
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="single-service-item">
+								<h2>Materials</h2>
+								<p>
+									Our raytracer supports two additional materials on top of basic cosine one. One being Matte which has no specular component and the other being Phong.
+										</p>
+								</p>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="single-service-item">
+								<h2>Samplers</h2>
+								<p>
+									Our rays sampler supports Jittered sampling to reduce aliasing. Regular and random sampling is also implemented.
+										</p>
+								</p>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="single-service-item">
+								<h2>Tracers</h2>
+								<p>
+									We have two types of tracers implemented. One is the basic ray tracer and the other is the shadow which supports shadows.
+										</p>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!--/.container-->
+
+		<!-- </section> -->
+		<!--service end-->
+
+		<!--new-cars start -->
+		<section id="service" class="new-cars">
+			<div class="container">
+				<div class="section-header">
+					<h2>Our Concept</h2>
+				</div><!--/.section-header-->
+				<div class="new-cars-content">
+					<div class="owl-carousel owl-theme" id="new-cars-carousel">
+						<div class="new-cars-item">
+							<div class="single-new-cars-item">
+								<div class="row">
+									<div class="col-md-7 col-sm-12">
+										<div class="new-cars-img">
+											<img src="assets/images/renders/lowResBabarAzam.png" alt="img"/>
+										</div><!--/.new-cars-img-->
+									</div>
+									<div class="col-md-5 col-sm-12">
+										<div class="new-cars-txt">
+											<h2><a href="#">The Omnipotent Cricketer</a></h2>
+											<p>
+												We have implemented Babar Azam in our raytracer. He is the best batsman in the world and we wanted to show him in the best light possible. Behind him are signs of a revolution in cricket. Babar Azam will bring yellow and green ball test cricket to reality. </br>
+												<b>Primitive Count:</b> 49,778 </br>
+												<b>Resolution:</b> 400x400 </br>
+												<b>Time Taken to Render:</b> 3.59 seconds </br>
+											</p>
+										</div><!--/.new-cars-txt-->	
+									</div><!--/.col-->
+								</div><!--/.row-->
+							</div><!--/.single-new-cars-item-->
+						</div><!--/.new-cars-item-->
+					</div><!--/#new-cars-carousel-->
+				</div><!--/.new-cars-content-->
+			</div><!--/.container-->
+
+		</section><!--/.new-cars-->
+		<!--new-cars end -->
+
+		<section class="featured-cars">
+			<div class="container">
+				<div class="section-header">
+					<h2>High Res Image</h2>
+				</div>
+				<p>This is an image of resolution: 1920x1920 and the time taken to render was 73.70 seconds</p>
+				<img style="height: 1000px; width: 1000px; margin-left: 10%;" src="./assets/images/renders/highResBabarAzam.png" />
+			</div>
+		</section>
+
+		<section id="featured-cars" class="featured-cars">
+			<div class="container">
+				<div class="section-header">
+					<h2>Acceleration Structure</h2>
+				</div>
+				<p>We used the Bounding Volume Hierarchy (BVH) and Grid Space Partitioning. They inherits from an abstract Acceleration class. We compared runtimes with and without the acceleration structure and got the following results. Each column displays the runtime in seconds. The overhead time is the initial time it takes to build the required structure over the primitives. The second column mentions the time taken to raytrace the scene.</p>
+				<img style="height: 500px; width: 1000px; margin-left: 10%;" src="./assets/images/renders/acceleration.png" />
+			</div>
+		</section>
+
+		<section id="new-cars" class="featured-cars">
+			<div class="container">
+				<div class="section-header">
+					<h2>Features</h2>
+					<p>Different features that we implemented to make the renders fun</p>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="service-item">
+							<img src="assets/images/renders/random.png" alt="">
+							<h4>Anti-Aliasing through Random Sampling</h4>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="service-item">
+							<img src="assets/images/renders/Phong.png" alt="">
+							<h4>Phong Material Shading</h4>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="service-item">
+							<img src="assets/images/renders/jittered.png" alt="">
+							<h4>Anti-Aliasing through Jittered Sampling</h4>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="service-item">
+							<img src="assets/images/renders/Shadows.png" alt="">
+							<h4>Shadows</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		</section><!--/.featured-cars-->
+		<!--featured-cars end -->
+
+		<!-- clients-say strat -->
+		<section id="brand"  class="clients-say">
+			<div class="container">
+				<div class="section-header">
+					<h2>Code Features</h2>
+				</div><!--/.section-header-->
+				<div class="row">
+					<div class="owl-carousel testimonial-carousel">
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<div class="testimonial-comment">
+										<h2>Acceleration</h2>
+										<p>
+											We have implemented Grid and BVH acceleration structures to speed up the ray tracing process.
+										</p>
+									</div><!--/.testimonial-comment-->
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div><!--/.col-->
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<div class="testimonial-comment">
+										<h2>Cameras</h2>
+										<p>
+											Our raytracer supports parallel and perspective projection of camera
+										</p>
+									</div><!--/.testimonial-comment-->
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div><!--/.col-->
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<div class="testimonial-comment">
+										<h2>Geometry</h2>
+										<p>
+											Our Raytracer implements the three basic primitives: Sphere, Triangle and Plane
+										</p>
+									</div><!--/.testimonial-comment-->
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div><!--/.col-->
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<div class="testimonial-comment">
+										<h2>Lights</h2>
+										<p>
+											We have implemented point lights and spot lights on top of the basic ambient lighting
+										</p>
+									</div><!--/.testimonial-comment-->
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div><!--/.col-->
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<div class="testimonial-comment">
+										<h2>Materials</h2>
+										<p>
+											Our raytracer supports two additional materials on top of basic cosine one. One being Matte which has no specular component and the other being Phong.
+										</p>
+									</div><!--/.testimonial-comment-->
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div><!--/.col-->
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<div class="testimonial-comment">
+										<h2>Samplers</h2>
+										<p>
+											Our rays sampler supports Jittered sampling to reduce aliasing. Regular and random sampling is also implemented.
+										</p>
+									</div><!--/.testimonial-comment-->
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div><!--/.col-->
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<div class="testimonial-comment">
+										<h2>Tracers</h2>
+										<p>
+											We have two types of tracers implemented. One is the basic ray tracer and the other is the shadow which supports shadows.
+										</p>
+									</div><!--/.testimonial-comment-->
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div><!--/.col-->
+					</div><!--/.testimonial-carousel-->
+				</div><!--/.row-->
+			</div><!--/.container-->
+
+		</section><!--/.clients-say-->	
+		<!-- clients-say end -->
+
+		<section id="renders" class="clients-say">
+			<div class="container">
+				<div class="section-header"><h2>Other Renders</h2></div>
+				<div class="row">
+					<div class="owl-carousel testimonial-carousel">
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<h2>Babar Azam in Space</h2>
+									<img src="assets/images/renders/rocketAzam.png" alt="" style="width: 100%; border-radius: 0px; height: 100%;">
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div>
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<h2>Basic Phong</h2>
+									<img src="assets/images/renders/Phong.png" alt="" style="width: 100%; border-radius: 0px; height: 100%;">
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div>
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<h2>Monke OO AA OO AA</h2>
+									<img src="assets/images/renders/Monke.png" alt="" style="width: 100%; border-radius: 0px; height: 100%;">
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div>
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<h2>Chapter 14</h2>
+									<img src="assets/images/renders/Chapter14.png" alt="" style="width: 100%; border-radius: 0px; height: 100%;">
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div>
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<h2>1000 spheres</h2>
+									<img src="assets/images/renders/1000-spheres.png" alt="" style="width: 100%; border-radius: 0px; height: 100%;">
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div>
+						<div class="col-sm-3 col-xs-12">
+							<div class="single-testimonial-box">
+								<div class="testimonial-description">
+									<h2>Basic Render w/ Shadows</h2>
+									<img src="assets/images/renders/Shadows.png" alt="" style="width: 100%; border-radius: 0px; height: 100%;">
+								</div><!--/.testimonial-description-->
+							</div><!--/.single-testimonial-box-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="clients-say">
+			<div class="container">
+					<div class="section-header" >
+						<h2 style="margin-bottom: 100px;">Acknowledgements</h2>
+						<ul>
+							<li style="margin-bottom: 20px;">Kevin Suffern - Ray Tracing from Ground Up</li></br>
+							<li style="margin-bottom: 20px;">Happly - A library for parsing Ply Files</li></br>
+							<li style="margin-bottom: 20px;">Sketchfab - For Free Models</li></br>
+							<li style="margin-bottom: 20px;">Dr. Waqar Saleem - For the insane course</li>
+						</ul>
+					</div>
+			</div>
+		</section>
+
+		<section id="contact" class="clients-say">
+			<div class="container">
+				<div class="section-header"><h2>Meet The Gangsters</h2></div>
+				<img class="team-image" src="./assets/images/renders/team.jpg" />
+			</div>
+
+		</section>
+
+		<!--blog start -->
+		<section id="blog" class="blog"></section><!--/.blog-->
+		<!--blog end -->
+		
+		<!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+		<script src="assets/js/jquery.js"></script>
+        
+        <!--modernizr.min.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		
+		<!--bootstrap.min.js-->
+        <script src="assets/js/bootstrap.min.js"></script>
+		
+		<!-- bootsnav js -->
+		<script src="assets/js/bootsnav.js"></script>
+
+		<!--owl.carousel.js-->
+        <script src="assets/js/owl.carousel.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+        <!--Custom JS-->
+        <script src="assets/js/custom.js"></script>
+        
+    </body>
+	
+</html>
