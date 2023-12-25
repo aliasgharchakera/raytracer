@@ -116,6 +116,6 @@ by running the following command:
 
 ## Acknowledgements
 
-- [Ray Tracing from Ground Up](https://www.amazon.com/Ray-Tracing-Ground-Kevin-Suffern/dp/1568812728)
+- [Ray Tracing from the Ground Up - Kevin Suffern](https://www.amazon.com/Ray-Tracing-Ground-Kevin-Suffern/dp/1568812728)
 - [Sketchfab](https://sketchfab.com/)
 - [Dr. Waqar Saleem](https://github.com/waqarsaleem)
